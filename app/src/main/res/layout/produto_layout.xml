@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/txtvw_nome_produto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="Nome"
+            android:paddingLeft="5dp"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/imgvw_produto" />
+
+        <TextView
+            android:id="@+id/txtvw_descricao_produto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:textColor="@color/gray"
+            android:paddingLeft="5dp"
+            android:text="Descricao"
+            android:layout_gravity="center_vertical|right"
+            android:inputType="textMultiLine"
+            android:layout_below="@+id/txtvw_nome_produto"
+            android:layout_toEndOf="@+id/imgvw_produto"
+            android:layout_toStartOf="@+id/txtvw_preco_produto" />
+
+        <ImageView
+            android:id="@+id/imgvw_produto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@drawable/produto_icon_default"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/txtvw_preco_produto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10,99 R$"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/imgvw_add_icon" />
+
+        <ImageView
+            android:id="@+id/imgvw_add_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add_icon_24"
+            android:paddingRight="15dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

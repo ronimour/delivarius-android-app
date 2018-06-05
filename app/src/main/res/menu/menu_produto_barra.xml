@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/itm_carrinho"
+        android:showAsAction="ifRoom"
+        android:title="Ver carrinho"
+        android:icon="@drawable/carrinho_icon_56_red"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/itm_limpar_carrinho"
+        android:showAsAction="ifRoom"
+        android:title="Limpar carrinho"
+        android:icon="@drawable/trash_icon_56_red"
+        app:showAsAction="always" />
+
+</menu>
