@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Delivarius</string>
+    <string name="login_hint">Login</string>
+    <string name="app_subtitle">App de compras para delivery</string>
+    <string name="password_hint">Senha</string>
+    <string name="login_button">Entrar</string>
+    <string name="register_button">Cadastre-se</string>
+    <string name="remember_checkbox">Lembrar-me</string>
+    <string name="create_account_text">Criar conta</string>
+    <string name="register_button_action">Cadastrar</string>
+    <string name="cancel_button">Cancelar</string>
+    <string name="name">Nome:</string>
+    <string name="email">Email</string>
 </resources>

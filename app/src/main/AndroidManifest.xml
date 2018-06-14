@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ronnysoft.delivarius">
+    package="com.delivarius.android">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -9,42 +9,42 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true">
-        <activity android:name=".view.activity.InicioActivity">
+        <activity android:name=".app.view.activity.InicioActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.ListagemLojasActivity">
+        <activity android:name=".app.view.activity.ListagemLojasActivity">
             <intent-filter>
                 <action android:name="ronnysoft.delivarius.LISTA_LOJAS" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.ListagemProdutosActivity">
+        <activity android:name=".app.view.activity.ListagemProdutosActivity">
             <intent-filter>
                 <action android:name="ronnysoft.delivarius.LISTA_PRODUTOS" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.PedidoItensActivity">
+        <activity android:name=".app.view.activity.PedidoItensActivity">
             <intent-filter>
                 <action android:name="ronnysoft.delivarius.LISTA_ITEM_PEDIDO" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.ConclusaoPedidoActivity">
+        <activity android:name=".app.view.activity.ConclusaoPedidoActivity">
             <intent-filter>
                 <action android:name="ronnysoft.delivarius.DADOS_PESSOAIS_PEDIDO" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.ListagemPedidosActivity">
+        <activity android:name=".app.view.activity.ListagemPedidosActivity">
             <intent-filter>
                 <action android:name="ronnysoft.delivarius.LISTA_PEDIDOS" />
 
@@ -53,15 +53,15 @@
         </activity>
 
         <service
-            android:name=".service.AtualizaStatusPedidosService"
+            android:name=".app.service.AtualizaStatusPedidosService"
             android:label="Serviço Atualizador de Status dos Pedidos">
         </service>
 
-        <service android:name=".service.AtualizaStatusPedidosJobService"
+        <service android:name=".app.service.AtualizaStatusPedidosJobService"
             android:label="Job Service" android:permission="android.permission.BIND_JOB_SERVICE" >
         </service>
 
-        <receiver android:name=".receiver.AtualizaStatusPedidosReceiver" >
+        <receiver android:name=".app.receiver.AtualizaStatusPedidosReceiver" >
             <intent-filter >
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
