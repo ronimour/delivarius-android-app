@@ -63,12 +63,14 @@
 
 
         <Button
-            android:id="@+id/nextButton"
+            android:id="@+id/previousLoginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:drawableLeft="@drawable/back_icon_24"
-            android:text="@string/previous_button_action" />
+            android:text="@string/previous_button_action"
+            android:onClick="enterAddressInfo"
+            />
 
         <Button
             android:id="@+id/registerButton"
@@ -76,7 +78,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:drawableLeft="@drawable/confirm_icon_24"
-            android:text="@string/register_button_action" />
+            android:text="@string/register_button_action"
+            android:onClick="register"
+            />
 
 
     </LinearLayout>

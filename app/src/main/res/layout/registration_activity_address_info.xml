@@ -32,7 +32,7 @@
             android:text="@string/street_label_register" />
 
         <EditText
-            android:id="@+id/nameEditText"
+            android:id="@+id/streetEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -77,7 +77,7 @@
             android:text="@string/city_label_register" />
 
         <EditText
-            android:id="@+id/zipcodeEditText"
+            android:id="@+id/cityEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -93,7 +93,7 @@
 
 
         <Button
-            android:id="@+id/previousButton"
+            android:id="@+id/previousAddressButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -102,12 +102,14 @@
             android:onClick="enterPersonalInfo"/>
 
         <Button
-            android:id="@+id/nextButton"
+            android:id="@+id/nextAddressButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:drawableLeft="@drawable/next_icon_24"
-            android:text="@string/next_button_action" />
+            android:text="@string/next_button_action"
+            android:onClick="enterLoginInfo"
+            />
 
 
     </LinearLayout>
