@@ -10,5 +10,24 @@
     <string name="register_button_action">Cadastrar</string>
     <string name="cancel_button">Cancelar</string>
     <string name="name">Nome:</string>
-    <string name="email">Email</string>
+    <string name="email">Email:</string>
+    <string name="birth_date_label">Data Nasc.:</string>
+    <string name="phone_label">Telefone</string>
+    <string name="next_button_action">Próximo</string>
+    <string name="login_label_register">Login:</string>
+    <string name="name_hint_register">Ex.: João Silva</string>
+    <string name="email_hint_register">Ex.: joao.silva@gmail.com</string>
+    <string name="login_hint_register">Ex.: joao.silva</string>
+    <string name="password_label_register">Senha:</string>
+    <string name="phone_hint_register">Ex.: (84) 996021235</string>
+    <string name="birthdate_hint_register">Ex.: 01/02/1990</string>
+    <string name="previous_button_action">Anterior</string>
+    <string name="street_label_register">Endereço:</string>
+    <string name="street_hint_register">Ex.: Av. Salgado Filho, 299, Lagoa Nova</string>
+    <string name="reference_label_register">Referência:</string>
+    <string name="reference_hint_register">Ex.: Próx. à farmácia...</string>
+    <string name="zipcode_label_register">CEP:</string>
+    <string name="zipcode_hint_register">Ex.: 59076-4000</string>
+    <string name="city_label_register">Cidade:</string>
+    <string name="city_hint_register">Ex.: Natal, RN</string>
 </resources>
