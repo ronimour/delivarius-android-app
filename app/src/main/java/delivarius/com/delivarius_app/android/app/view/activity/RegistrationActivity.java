@@ -14,6 +14,7 @@ import com.delivarius.delivarius_api.dto.Phone;
 import com.delivarius.delivarius_api.dto.User;
 import com.delivarius.delivarius_api.service.ServiceLocator;
 import com.delivarius.delivarius_api.service.UserService;
+import com.delivarius.delivarius_api.service.exception.ServiceException;
 
 import java.io.IOException;
 
@@ -49,6 +50,7 @@ public class RegistrationActivity extends DelivariusActivity {
     public void register(View view){
 
         if(isValid(this.user)) {
+            setUserFromViewLoginInfo();
             CreateUser createUser = new CreateUser();
             createUser.execute(this.user, this.password);
         }
@@ -67,9 +69,9 @@ public class RegistrationActivity extends DelivariusActivity {
             String password = (String) params[1];
             User userCreated = null;
             try {
-                UserService userService = new UserService();//(UserService) ServiceLocator.getInstance().getService(UserService.class);
+                UserService userService = (UserService) ServiceLocator.getInstance().getService(UserService.class);
                 userCreated = userService.createClientUser(user, password );
-            } catch (IOException e) {
+            } catch (ServiceException e) {
                 e.printStackTrace();
             }
 
