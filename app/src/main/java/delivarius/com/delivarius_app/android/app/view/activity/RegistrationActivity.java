@@ -71,7 +71,7 @@ public class RegistrationActivity extends DelivariusActivity {
 
             try {
                 UserService userService = (UserService) ServiceLocator.getInstance().getService(UserService.class);
-                userService.setUrlBase("http://127.0.0.1:8080");
+                userService.setUrlBase("http://10.0.2.2:8081");
                 userCreated = userService.createClientUser(user, password);
             } catch (ServiceException e){
                 e.printStackTrace();
@@ -83,14 +83,21 @@ public class RegistrationActivity extends DelivariusActivity {
         @Override
         protected void onPostExecute(User user) {
             if(user != null && user.getId() != null && user.getId() > 0){
-                Intent intent = new Intent("android.intent.action.MAIN");
-                startActivity(intent);
-                showToastShort("User created.");
+                backToTheStart("User created.");
+
             } else{
                 showToastShort("Fail to create the user.");
             }
             super.onPostExecute(user);
         }
+    }
+
+    private void backToTheStart(String message){
+        if(message != null && !message.isEmpty()){
+            showToastShort("User created.");
+        }
+        Intent intent = new Intent("android.intent.action.MAIN");
+        startActivity(intent);
     }
 
     public void enterLoginInfo(View view){
