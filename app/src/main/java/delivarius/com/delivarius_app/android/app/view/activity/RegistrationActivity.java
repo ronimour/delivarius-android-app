@@ -68,10 +68,12 @@ public class RegistrationActivity extends DelivariusActivity {
             User user = (User) params[0];
             String password = (String) params[1];
             User userCreated = null;
+
             try {
                 UserService userService = (UserService) ServiceLocator.getInstance().getService(UserService.class);
-                userCreated = userService.createClientUser(user, password );
-            } catch (ServiceException e) {
+                userService.setUrlBase("http://127.0.0.1:8080");
+                userCreated = userService.createClientUser(user, password);
+            } catch (ServiceException e){
                 e.printStackTrace();
             }
 
