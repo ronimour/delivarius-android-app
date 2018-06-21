@@ -120,6 +120,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:drawableLeft="@drawable/cancel_icon_24"
-        android:text="@string/cancel_button" />
+        android:text="@string/cancel_button"
+        android:onClick="cancel"
+        />
 
 </LinearLayout>

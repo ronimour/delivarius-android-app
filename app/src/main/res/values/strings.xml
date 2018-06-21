@@ -30,4 +30,21 @@
     <string name="zipcode_hint_register">Ex.: 59076-4000</string>
     <string name="city_label_register">Cidade:</string>
     <string name="city_hint_register">Ex.: Natal, RN</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="fail_create_user">Falha ao criar o usuário. Favor tentar novamento mais tarde.</string>
+    <string name="success_create_user">Usuário cadastrado com sucesso. Agora é só fazer o login e começar a usar o app :)</string>
+    <string name="registration_canceled">Cadastro cancelado</string>
+    <string name="cancel_registration_dialog_message">Deseja realmente cancelar o cadastro?</string>
+    <string name="registering_user_message_progress">Cadastrando usuário...</string>
+    <string name="cart_menu_label">Carrinho</string>
+    <string name="search_products_menu_label">Buscar produtos</string>
+    <string name="orders_menu_label">Pedidos</string>
+    <string name="messages_menu_label">Mensagens</string>
+    <string name="edit_account_menu_label">Editar conta</string>
+    <string name="help_menu_label">Ajuda</string>
+    <string name="login_message_progress">Fazendo login...</string>
+    <string name="login_failed_message">Falha no login. Login ou senha incorreta.</string>
+    <string name="login_password_empty_error">Login e senha não podem ser vazios</string>
+
 </resources>

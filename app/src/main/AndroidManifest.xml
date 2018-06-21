@@ -27,6 +27,14 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".android.app.view.activity.HomeActivity">
+            <intent-filter>
+                <action android:name="com.delivarius.app.HOME" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

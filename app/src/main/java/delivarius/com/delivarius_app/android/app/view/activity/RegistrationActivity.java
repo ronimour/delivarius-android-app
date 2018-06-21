@@ -1,22 +1,19 @@
 package delivarius.com.delivarius_app.android.app.view.activity;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.delivarius.delivarius_api.dto.Address;
 import com.delivarius.delivarius_api.dto.Phone;
 import com.delivarius.delivarius_api.dto.User;
-import com.delivarius.delivarius_api.service.ServiceLocator;
 import com.delivarius.delivarius_api.service.UserService;
 import com.delivarius.delivarius_api.service.exception.ServiceException;
-
-import java.io.IOException;
 
 import delivarius.com.delivarius_app.R;
 import delivarius.com.delivarius_app.android.app.view.helper.ViewHelper;
@@ -27,6 +24,8 @@ public class RegistrationActivity extends DelivariusActivity {
     private User user = null;
 
     private String password = null;
+    
+    private final CancelRegistrationOnClickListener positiveCancel = new CancelRegistrationOnClickListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +43,21 @@ public class RegistrationActivity extends DelivariusActivity {
     }
 
     public void cancel(View view){
+        showDialogYesOrNo(positiveCancel, cancelDialog, getString(R.string.cancel_registration_dialog_message));
+    }
 
+    private class CancelRegistrationOnClickListener implements DialogInterface.OnClickListener{
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            backToTheStart(getString(R.string.registration_canceled), RESULT_CANCELED);
+        }
     }
 
     public void register(View view){
 
         if(isValid(this.user)) {
             setUserFromViewLoginInfo();
-            CreateUser createUser = new CreateUser();
-            createUser.execute(this.user, this.password);
+            getCreateUserAsyncTask().execute(this.user, this.password);
         }
     }
 
@@ -61,7 +66,21 @@ public class RegistrationActivity extends DelivariusActivity {
     }
 
 
-    private class CreateUser extends AsyncTask<Object, Void, User> {
+    private CreateUserAsyncTask getCreateUserAsyncTask(){
+        return new CreateUserAsyncTask();
+    }
+
+    private class CreateUserAsyncTask extends AsyncTask<Object, Void, User> {
+
+        ProgressDialog progressDialog = new ProgressDialog(RegistrationActivity.this);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog.setMessage(getString(R.string.registering_user_message_progress));
+            progressDialog.show();
+        }
 
         @Override
         protected User doInBackground(Object... params) {
@@ -70,8 +89,7 @@ public class RegistrationActivity extends DelivariusActivity {
             User userCreated = null;
 
             try {
-                UserService userService = (UserService) ServiceLocator.getInstance().getService(UserService.class);
-                userService.setUrlBase("http://10.0.2.2:8081");
+                UserService userService = getUserService();
                 userCreated = userService.createClientUser(user, password);
             } catch (ServiceException e){
                 e.printStackTrace();
@@ -82,22 +100,22 @@ public class RegistrationActivity extends DelivariusActivity {
 
         @Override
         protected void onPostExecute(User user) {
-            if(user != null && user.getId() != null && user.getId() > 0){
-                backToTheStart("User created.");
-
-            } else{
-                showToastShort("Fail to create the user.");
-            }
             super.onPostExecute(user);
+            progressDialog.dismiss();
+            if(user != null && user.getId() != null && user.getId() > 0){
+                backToTheStart(getString(R.string.success_create_user), RESULT_SUCCESS);
+            } else{
+                backToTheStart(getString(R.string.fail_create_user), RESULT_FAIL);
+            }
+
         }
     }
 
-    private void backToTheStart(String message){
-        if(message != null && !message.isEmpty()){
-            showToastShort("User created.");
-        }
-        Intent intent = new Intent("android.intent.action.MAIN");
-        startActivity(intent);
+    private void backToTheStart(String message, int resultCode){
+        Intent result = new Intent();
+        result.putExtra(RESULT_MESSAGE, message);
+        setResult(resultCode, result);
+        finish();
     }
 
     public void enterLoginInfo(View view){

@@ -1,10 +1,20 @@
 package delivarius.com.delivarius_app.android.app.view.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.delivarius.delivarius_api.dto.User;
+import com.delivarius.delivarius_api.service.UserService;
+import com.delivarius.delivarius_api.service.exception.ServiceException;
 
 import delivarius.com.delivarius_app.R;
+import delivarius.com.delivarius_app.android.app.view.helper.ViewHelper;
 
 public class StartActivity extends DelivariusActivity {
 
@@ -15,8 +25,84 @@ public class StartActivity extends DelivariusActivity {
     }
 
     public void register(View view ){
-        Intent intent = new Intent("com.delivarius.app.REGISTRATION");
-        startActivity(intent);
+        Intent registrationIntent = new Intent("com.delivarius.app.REGISTRATION");
+        startActivityForResult(registrationIntent, REGISTER_REQUEST_CODE);
     }
 
+
+    public void login(View view ){
+        EditText loginText  = (EditText) findViewById(R.id.loginEditText);
+        EditText passwordText  = (EditText) findViewById(R.id.passwordEditText);
+        if(ViewHelper.isAnyEmpty(loginText,passwordText)){
+            showToastLong(getString(R.string.login_password_empty_error));
+        } else {
+            getLoginAsyncTask().execute(loginText.getText().toString(), passwordText.getText().toString());
+        }
+    }
+
+    private LoginAsyncTask getLoginAsyncTask(){
+        return new LoginAsyncTask();
+    }
+
+    private class LoginAsyncTask extends AsyncTask<String, Void, User> {
+
+
+        ProgressDialog progressDialog = new ProgressDialog(StartActivity.this);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog.setMessage(getString(R.string.login_message_progress));
+            progressDialog.show();
+        }
+
+        @Override
+        protected User doInBackground(String... strings) {
+            String login = strings[0];
+            String password = strings[1];
+            User user = null;
+            try{
+                UserService userService = getUserService();
+                user = userService.login(login, password);
+            } catch (ServiceException e){
+                e.printStackTrace();
+            }
+
+            return user;
+        }
+
+        @Override
+        protected void onPostExecute(User user) {
+            progressDialog.dismiss();
+            if(user != null){
+                Intent homeIntent = new Intent("com.delivarius.app.HOME");
+                homeIntent.putExtra(USER, user);
+                startActivityForResult(homeIntent, HOME_REQUEST_CODE);
+            } else {
+                showToastLong(getString(R.string.login_failed_message));
+            }
+
+            super.onPostExecute(user);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (requestCode){
+            case REGISTER_REQUEST_CODE:
+                String message = data.getStringExtra(RESULT_MESSAGE);
+                if(resultCode == RESULT_CANCELED){
+                    showToastShort(message);
+                } else if(resultCode == RESULT_FAIL || resultCode == RESULT_SUCCESS){
+                    showToastLong(message);
+                }
+                break;
+            default:
+                showToastShort("?");
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }
