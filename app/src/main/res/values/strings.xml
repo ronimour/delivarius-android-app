@@ -48,5 +48,11 @@
     <string name="login_password_empty_error">Login e senha não podem ser vazios</string>
     <string name="logout">Sair</string>
     <string name="logout_message_dialog">Deseja realmente sair?</string>
+    <string name="personal_info_edit_menu_label">Info. pessoais</string>
+    <string name="contact_edit_menu_label">Contato</string>
+    <string name="password_edit_menu_label">Senha</string>
+    <string name="address_edit_menu_label">Endereço</string>
+    <string name="delete_account_edit_menu">Remover Conta</string>
+    <string name="back_edit_menu_label">Voltar</string>
 
 </resources>
