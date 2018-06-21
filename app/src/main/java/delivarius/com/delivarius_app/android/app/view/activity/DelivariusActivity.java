@@ -5,9 +5,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.delivarius.delivarius_api.dto.User;
 import com.delivarius.delivarius_api.service.ServiceLocator;
 import com.delivarius.delivarius_api.service.UserService;
 import com.delivarius.delivarius_api.service.exception.ServiceException;
@@ -34,10 +36,13 @@ public class DelivariusActivity extends Activity {
 
     public static final String REMEMBER_LOGIN = "REMEMBER_LOGIN";
 
-
     protected final CancelDialogOnClickListener cancelDialog = new CancelDialogOnClickListener();
 
+    private final LogoutOnClickListener logoutOnClickListener = new LogoutOnClickListener();
+
     protected UserService userService = null;
+
+    protected static User currentUser = null;
 
 
     public UserService getUserService() throws ServiceException {
@@ -75,5 +80,17 @@ public class DelivariusActivity extends Activity {
             dialogInterface.cancel();
         }
     }
+    public void logout(View view){
+        showDialogYesOrNo(logoutOnClickListener, cancelDialog, getString(R.string.logout_message_dialog));
+    }
+
+    private class LogoutOnClickListener implements DialogInterface.OnClickListener{
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            setResult(RESULT_LOGOUT);
+            finish();
+        }
+    }
+
 
 }

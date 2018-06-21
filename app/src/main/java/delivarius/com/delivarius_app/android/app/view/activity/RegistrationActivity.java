@@ -49,7 +49,7 @@ public class RegistrationActivity extends DelivariusActivity {
     private class CancelRegistrationOnClickListener implements DialogInterface.OnClickListener{
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
-            backToTheStart(getString(R.string.registration_canceled), RESULT_CANCELED);
+            returnToStart(getString(R.string.registration_canceled), RESULT_CANCELED);
         }
     }
 
@@ -103,15 +103,15 @@ public class RegistrationActivity extends DelivariusActivity {
             super.onPostExecute(user);
             progressDialog.dismiss();
             if(user != null && user.getId() != null && user.getId() > 0){
-                backToTheStart(getString(R.string.success_create_user), RESULT_SUCCESS);
+                returnToStart(getString(R.string.success_create_user), RESULT_SUCCESS);
             } else{
-                backToTheStart(getString(R.string.fail_create_user), RESULT_FAIL);
+                returnToStart(getString(R.string.fail_create_user), RESULT_FAIL);
             }
 
         }
     }
 
-    private void backToTheStart(String message, int resultCode){
+    private void returnToStart(String message, int resultCode){
         Intent result = new Intent();
         result.putExtra(RESULT_MESSAGE, message);
         setResult(resultCode, result);
