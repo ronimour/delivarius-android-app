@@ -1,6 +1,9 @@
 package delivarius.com.delivarius_app.android.app.view.activity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -15,6 +18,8 @@ public class HomeActivity extends DelivariusActivity {
 
     private User user = null;
 
+    private final LogoutOnClickListener logoutOnClickListener = new LogoutOnClickListener();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,5 +32,18 @@ public class HomeActivity extends DelivariusActivity {
             userMenuHome.setText(user.getLogin());
         }
 
+    }
+
+    public void logout(View view){
+        showDialogYesOrNo(logoutOnClickListener, cancelDialog, getString(R.string.logout_message_dialog));
+    }
+
+    private class LogoutOnClickListener implements DialogInterface.OnClickListener{
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            setResult(RESULT_LOGOUT);
+            user = null;
+            finish();
+        }
     }
 }

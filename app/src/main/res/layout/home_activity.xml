@@ -7,14 +7,34 @@
     android:weightSum="1">
 
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/userHomeMenu"
-        android:drawableLeft="@drawable/user_icon_24"
-        android:layout_gravity="right"
-        android:layout_margin="20dp"
-        />
+        android:orientation="horizontal"
+        android:gravity="right"
+        >
+
+        <TextView
+            android:id="@+id/userHomeMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="20dp"
+            android:drawableLeft="@drawable/user_icon_24" />
+
+        <TextView
+            android:id="@+id/logoutHomeMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="20dp"
+            android:drawableLeft="@drawable/logout_icon_24"
+            android:text="@string/logout"
+            android:onClick="logout"
+            />
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

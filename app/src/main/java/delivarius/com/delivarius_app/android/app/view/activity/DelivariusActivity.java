@@ -3,6 +3,9 @@ package delivarius.com.delivarius_app.android.app.view.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.delivarius.delivarius_api.service.ServiceLocator;
@@ -21,9 +24,16 @@ public class DelivariusActivity extends Activity {
 
     public static final int RESULT_FAIL = -1001;
 
+    public static final int RESULT_LOGOUT = 1002;
+
     public static final String RESULT_MESSAGE = "RESULT_MESSAGE";
 
     public static final String USER = "USER";
+
+    public static final String USER_ID = "USER_ID";
+
+    public static final String REMEMBER_LOGIN = "REMEMBER_LOGIN";
+
 
     protected final CancelDialogOnClickListener cancelDialog = new CancelDialogOnClickListener();
 
@@ -65,4 +75,5 @@ public class DelivariusActivity extends Activity {
             dialogInterface.cancel();
         }
     }
+
 }

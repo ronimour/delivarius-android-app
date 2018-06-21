@@ -1,13 +1,14 @@
 package delivarius.com.delivarius_app.android.app.view.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.delivarius.delivarius_api.dto.User;
 import com.delivarius.delivarius_api.service.UserService;
@@ -18,10 +19,20 @@ import delivarius.com.delivarius_app.android.app.view.helper.ViewHelper;
 
 public class StartActivity extends DelivariusActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_activity);
+
+        SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
+        if(preferences.contains(REMEMBER_LOGIN) && preferences.getBoolean(REMEMBER_LOGIN, false)){
+            Long userId = preferences.getLong(USER_ID, 0);
+            if(userId > 0){
+                getAutoLoginAsyncTask().execute(userId.toString());
+            }
+        }
+
     }
 
     public void register(View view ){
@@ -40,8 +51,29 @@ public class StartActivity extends DelivariusActivity {
         }
     }
 
+    private class AutoLoginAsyncTask extends LoginAsyncTask{
+
+        @Override
+        protected User doInBackground(String... strings) {
+            User user = null;
+            Long userId = Long.parseLong(strings[0]);
+
+            try{
+                user = getUserService().getUser(userId);
+            } catch (ServiceException e){
+                e.printStackTrace();
+            }
+
+            return user;
+        }
+    }
+
     private LoginAsyncTask getLoginAsyncTask(){
         return new LoginAsyncTask();
+    }
+
+    private AutoLoginAsyncTask getAutoLoginAsyncTask(){
+        return new AutoLoginAsyncTask();
     }
 
     private class LoginAsyncTask extends AsyncTask<String, Void, User> {
@@ -76,6 +108,7 @@ public class StartActivity extends DelivariusActivity {
         protected void onPostExecute(User user) {
             progressDialog.dismiss();
             if(user != null){
+                checkSaveLogin(user);
                 Intent homeIntent = new Intent("com.delivarius.app.HOME");
                 homeIntent.putExtra(USER, user);
                 startActivityForResult(homeIntent, HOME_REQUEST_CODE);
@@ -85,6 +118,16 @@ public class StartActivity extends DelivariusActivity {
 
             super.onPostExecute(user);
         }
+    }
+
+    private void checkSaveLogin(User user){
+        CheckBox rememberLoginCheckBox = (CheckBox) findViewById(R.id.rembemberLoginCheckBox);
+
+        SharedPreferences.Editor editor = this.getPreferences(Context.MODE_PRIVATE).edit();
+        editor.putLong(USER_ID,user.getId());
+        editor.putBoolean(REMEMBER_LOGIN, rememberLoginCheckBox.isChecked());
+        editor.apply();
+
     }
 
     @Override
@@ -97,6 +140,13 @@ public class StartActivity extends DelivariusActivity {
                     showToastShort(message);
                 } else if(resultCode == RESULT_FAIL || resultCode == RESULT_SUCCESS){
                     showToastLong(message);
+                }
+                break;
+            case HOME_REQUEST_CODE:
+                if(resultCode == RESULT_LOGOUT) {
+                    SharedPreferences.Editor editor = this.getPreferences(Context.MODE_PRIVATE).edit();
+                    editor.putBoolean(REMEMBER_LOGIN, false);
+                    editor.apply();
                 }
                 break;
             default:

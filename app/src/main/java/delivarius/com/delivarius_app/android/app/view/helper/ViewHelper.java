@@ -13,4 +13,10 @@ public class ViewHelper {
 
         return false;
     }
+
+    public static boolean isEmpty(@NonNull EditText editText){
+        return editText.getText() != null && editText.getText().toString().isEmpty();
+    }
+
+
 }

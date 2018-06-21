@@ -46,5 +46,7 @@
     <string name="login_message_progress">Fazendo login...</string>
     <string name="login_failed_message">Falha no login. Login ou senha incorreta.</string>
     <string name="login_password_empty_error">Login e senha não podem ser vazios</string>
+    <string name="logout">Sair</string>
+    <string name="logout_message_dialog">Deseja realmente sair?</string>
 
 </resources>
