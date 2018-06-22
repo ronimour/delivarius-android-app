@@ -31,5 +31,13 @@ public class HomeActivity extends DelivariusActivity {
 
     }
 
+    public void editUser(View view){
+        Intent intent = new Intent("com.delivarius.app.EDIT");
+        startActivityForResult(intent, HOME_REQUEST_CODE);
+    }
+
+
+
+
 
 }

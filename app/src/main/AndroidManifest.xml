@@ -35,6 +35,14 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".android.app.view.activity.EditActivity">
+            <intent-filter>
+                <action android:name="com.delivarius.app.EDIT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

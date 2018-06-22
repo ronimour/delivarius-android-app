@@ -95,8 +95,7 @@ public class StartActivity extends DelivariusActivity {
             String password = strings[1];
             User user = null;
             try{
-                UserService userService = getUserService();
-                user = userService.login(login, password);
+                user = getUserService().login(login, password);
             } catch (ServiceException e){
                 e.printStackTrace();
             }

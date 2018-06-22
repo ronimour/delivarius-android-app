@@ -38,7 +38,7 @@ public class RegistrationActivity extends DelivariusActivity {
         }
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.registration_activity_personal_info);
+        setContentView(R.layout.registration_personal_info_activity);
 
     }
 
@@ -89,8 +89,7 @@ public class RegistrationActivity extends DelivariusActivity {
             User userCreated = null;
 
             try {
-                UserService userService = getUserService();
-                userCreated = userService.createClientUser(user, password);
+                userCreated = getUserService().createClientUser(user, password);
             } catch (ServiceException e){
                 e.printStackTrace();
             }
@@ -121,7 +120,7 @@ public class RegistrationActivity extends DelivariusActivity {
     public void enterLoginInfo(View view){
 
         if(setUserFromViewAddressInfo()) {
-            setContentView(R.layout.registration_activity_login_info);
+            setContentView(R.layout.registration_login_info_activity);
             setViewFromUserLoginInfo();
         }
 
@@ -132,12 +131,12 @@ public class RegistrationActivity extends DelivariusActivity {
 
         if(id == R.id.nextPersonalButton) {
             if (setUserFromViewPersonalInfo()) {
-                setContentView(R.layout.registration_activity_address_info);
+                setContentView(R.layout.registration_address_info_activity);
                 setViewFromUserAddressInfo();
             }
         } else if(id == R.id.previousLoginButton) {
             setUserFromViewLoginInfo();
-            setContentView(R.layout.registration_activity_address_info);
+            setContentView(R.layout.registration_address_info_activity);
             setViewFromUserAddressInfo();
         }
 
@@ -146,7 +145,7 @@ public class RegistrationActivity extends DelivariusActivity {
 
     public void enterPersonalInfo(View view){
         setUserFromViewAddressInfo();
-        setContentView(R.layout.registration_activity_personal_info);
+        setContentView(R.layout.registration_personal_info_activity);
         setViewFromUserPersonalInfo();
     }
 

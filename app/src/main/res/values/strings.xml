@@ -54,5 +54,8 @@
     <string name="address_edit_menu_label">Endereço</string>
     <string name="delete_account_edit_menu">Remover Conta</string>
     <string name="back_edit_menu_label">Voltar</string>
+    <string name="update_button_action">Atualizar</string>
+    <string name="success_update_user">Usuário atualizado com sucesso</string>
+    <string name="fail_update_user">Falha ao atualizar o usuário</string>
 
 </resources>

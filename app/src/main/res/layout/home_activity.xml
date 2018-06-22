@@ -116,7 +116,8 @@
             android:layout_marginRight="50dp"
             android:layout_marginTop="20dp"
             android:drawableTop="@drawable/pencil_icon_56"
-            android:text="@string/edit_account_menu_label" />
+            android:text="@string/edit_account_menu_label"
+            android:onClick="editUser" />
 
         <TextView
             android:layout_width="wrap_content"

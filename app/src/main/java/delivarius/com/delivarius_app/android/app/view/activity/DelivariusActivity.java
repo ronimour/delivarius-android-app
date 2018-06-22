@@ -22,6 +22,8 @@ public class DelivariusActivity extends Activity {
 
     public static final int HOME_REQUEST_CODE = 2;
 
+    public static final int EDIT_REQUEST_CODE = 3;
+
     public static final int RESULT_SUCCESS = 1000;
 
     public static final int RESULT_FAIL = -1001;
