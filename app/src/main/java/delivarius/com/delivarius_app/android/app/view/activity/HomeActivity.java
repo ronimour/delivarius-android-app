@@ -33,11 +33,21 @@ public class HomeActivity extends DelivariusActivity {
 
     public void editUser(View view){
         Intent intent = new Intent("com.delivarius.app.EDIT");
-        startActivityForResult(intent, HOME_REQUEST_CODE);
+        startActivityForResult(intent, EDIT_REQUEST_CODE);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        switch (requestCode){
+            case EDIT_REQUEST_CODE:
+                if(resultCode == RESULT_USER_DELETED){
+                    setResult(RESULT_SUCCESS, data);
+                    finish();
+                }
 
+        }
 
-
+    }
 }

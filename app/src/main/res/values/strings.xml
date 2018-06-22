@@ -57,5 +57,7 @@
     <string name="update_button_action">Atualizar</string>
     <string name="success_update_user">Usuário atualizado com sucesso</string>
     <string name="fail_update_user">Falha ao atualizar o usuário</string>
+    <string name="success_delete_user">Conta deletada com sucesso</string>
+    <string name="fail_delete_user">Falha ao deletar conta</string>
 
 </resources>

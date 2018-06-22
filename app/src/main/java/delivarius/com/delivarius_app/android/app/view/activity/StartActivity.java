@@ -26,41 +26,41 @@ public class StartActivity extends DelivariusActivity {
         setContentView(R.layout.start_activity);
 
         SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
-        if(preferences.contains(REMEMBER_LOGIN) && preferences.getBoolean(REMEMBER_LOGIN, false)){
+        if (preferences.contains(REMEMBER_LOGIN) && preferences.getBoolean(REMEMBER_LOGIN, false)) {
             Long userId = preferences.getLong(USER_ID, 0);
-            if(userId > 0){
+            if (userId > 0) {
                 getAutoLoginAsyncTask().execute(userId.toString());
             }
         }
 
     }
 
-    public void register(View view ){
+    public void register(View view) {
         Intent registrationIntent = new Intent("com.delivarius.app.REGISTRATION");
         startActivityForResult(registrationIntent, REGISTER_REQUEST_CODE);
     }
 
 
-    public void login(View view ){
-        EditText loginText  = (EditText) findViewById(R.id.loginEditText);
-        EditText passwordText  = (EditText) findViewById(R.id.passwordEditText);
-        if(ViewHelper.isAnyEmpty(loginText,passwordText)){
+    public void login(View view) {
+        EditText loginText = (EditText) findViewById(R.id.loginEditText);
+        EditText passwordText = (EditText) findViewById(R.id.passwordEditText);
+        if (ViewHelper.isAnyEmpty(loginText, passwordText)) {
             showToastLong(getString(R.string.login_password_empty_error));
         } else {
             getLoginAsyncTask().execute(loginText.getText().toString(), passwordText.getText().toString());
         }
     }
 
-    private class AutoLoginAsyncTask extends LoginAsyncTask{
+    private class AutoLoginAsyncTask extends LoginAsyncTask {
 
         @Override
         protected User doInBackground(String... strings) {
             User user = null;
             Long userId = Long.parseLong(strings[0]);
 
-            try{
+            try {
                 user = getUserService().getUser(userId);
-            } catch (ServiceException e){
+            } catch (ServiceException e) {
                 e.printStackTrace();
             }
 
@@ -68,11 +68,11 @@ public class StartActivity extends DelivariusActivity {
         }
     }
 
-    private LoginAsyncTask getLoginAsyncTask(){
+    private LoginAsyncTask getLoginAsyncTask() {
         return new LoginAsyncTask();
     }
 
-    private AutoLoginAsyncTask getAutoLoginAsyncTask(){
+    private AutoLoginAsyncTask getAutoLoginAsyncTask() {
         return new AutoLoginAsyncTask();
     }
 
@@ -94,9 +94,9 @@ public class StartActivity extends DelivariusActivity {
             String login = strings[0];
             String password = strings[1];
             User user = null;
-            try{
+            try {
                 user = getUserService().login(login, password);
-            } catch (ServiceException e){
+            } catch (ServiceException e) {
                 e.printStackTrace();
             }
 
@@ -106,7 +106,7 @@ public class StartActivity extends DelivariusActivity {
         @Override
         protected void onPostExecute(User user) {
             progressDialog.dismiss();
-            if(user != null){
+            if (user != null) {
                 checkSaveLogin(user);
                 Intent homeIntent = new Intent("com.delivarius.app.HOME");
                 homeIntent.putExtra(USER, user);
@@ -119,11 +119,11 @@ public class StartActivity extends DelivariusActivity {
         }
     }
 
-    private void checkSaveLogin(User user){
+    private void checkSaveLogin(User user) {
         CheckBox rememberLoginCheckBox = (CheckBox) findViewById(R.id.rembemberLoginCheckBox);
 
         SharedPreferences.Editor editor = this.getPreferences(Context.MODE_PRIVATE).edit();
-        editor.putLong(USER_ID,user.getId());
+        editor.putLong(USER_ID, user.getId());
         editor.putBoolean(REMEMBER_LOGIN, rememberLoginCheckBox.isChecked());
         editor.apply();
 
@@ -132,26 +132,30 @@ public class StartActivity extends DelivariusActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        switch (requestCode){
+        if (resultCode == RESULT_LOGOUT) {
+            SharedPreferences.Editor editor = this.getPreferences(Context.MODE_PRIVATE).edit();
+            editor.putBoolean(REMEMBER_LOGIN, false);
+            editor.apply();
+        }
+        String message = data.getStringExtra(RESULT_MESSAGE);
+        switch (requestCode) {
+
             case REGISTER_REQUEST_CODE:
-                String message = data.getStringExtra(RESULT_MESSAGE);
-                if(resultCode == RESULT_CANCELED){
+                if (resultCode == RESULT_CANCELED) {
                     showToastShort(message);
-                } else if(resultCode == RESULT_FAIL || resultCode == RESULT_SUCCESS){
+                } else if (resultCode == RESULT_FAIL || resultCode == RESULT_SUCCESS) {
                     showToastLong(message);
                 }
                 break;
             case HOME_REQUEST_CODE:
-                if(resultCode == RESULT_LOGOUT) {
-                    SharedPreferences.Editor editor = this.getPreferences(Context.MODE_PRIVATE).edit();
-                    editor.putBoolean(REMEMBER_LOGIN, false);
-                    editor.apply();
+                if(resultCode == RESULT_SUCCESS){
+                    showToastShort(message);
                 }
                 break;
+
             default:
                 showToastShort("?");
         }
 
-        super.onActivityResult(requestCode, resultCode, data);
     }
 }

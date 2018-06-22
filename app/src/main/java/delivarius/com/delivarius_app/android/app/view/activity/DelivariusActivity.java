@@ -3,6 +3,7 @@ package delivarius.com.delivarius_app.android.app.view.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -29,6 +30,8 @@ public class DelivariusActivity extends Activity {
     public static final int RESULT_FAIL = -1001;
 
     public static final int RESULT_LOGOUT = 1002;
+
+    public static final int RESULT_USER_DELETED = 1003;
 
     public static final String RESULT_MESSAGE = "RESULT_MESSAGE";
 
@@ -94,5 +97,13 @@ public class DelivariusActivity extends Activity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_LOGOUT ){
+            setResult(RESULT_LOGOUT);
+            finish();
+        }
 
+    }
 }

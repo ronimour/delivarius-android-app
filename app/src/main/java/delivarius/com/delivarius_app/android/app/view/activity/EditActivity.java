@@ -41,6 +41,53 @@ public class EditActivity extends DelivariusActivity {
 
     }
 
+    public void deleteUser(View view){
+
+    }
+
+    private class DeleteUserAsyncTask extends AsyncTask<User, Void, Boolean>{
+
+        ProgressDialog progressDialog = new ProgressDialog(EditActivity.this);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog.setMessage(getString(R.string.registering_user_message_progress));
+            progressDialog.show();
+        }
+
+        @Override
+        protected Boolean doInBackground(User... params) {
+            User userToDelete = params[0];
+            Boolean deleted = false;
+            try {
+                deleted = getUserService().deleteUser(userToDelete.getId());
+            } catch (ServiceException e){
+                e.printStackTrace();
+            }
+
+            return deleted;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean deleted) {
+            progressDialog.dismiss();
+            if(deleted){
+                finishActivity(RESULT_USER_DELETED, getString(R.string.success_delete_user));
+            } else{
+                showToastLong(getString(R.string.fail_delete_user));
+            }
+        }
+
+    }
+
+    public void finishActivity(int resultCode, String message){
+        getIntent().putExtra(RESULT_MESSAGE, message);
+        setResult(resultCode,getIntent());
+        finish();
+    }
+
     private EditUserAsyncTask getUserAsyncTask(){
         return new EditUserAsyncTask();
     }
