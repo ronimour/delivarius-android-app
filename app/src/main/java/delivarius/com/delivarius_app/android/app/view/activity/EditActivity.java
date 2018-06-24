@@ -2,6 +2,7 @@ package delivarius.com.delivarius_app.android.app.view.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -15,10 +16,14 @@ import com.delivarius.delivarius_api.dto.User;
 import com.delivarius.delivarius_api.service.UserService;
 import com.delivarius.delivarius_api.service.exception.ServiceException;
 
+import java.net.ConnectException;
+
 import delivarius.com.delivarius_app.R;
 import delivarius.com.delivarius_app.android.app.view.helper.ViewHelper;
 
 public class EditActivity extends DelivariusActivity {
+
+    private final DeleteUserOnClickListener positiveDeleteUser = new DeleteUserOnClickListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +41,34 @@ public class EditActivity extends DelivariusActivity {
 
     public void updateAddress(View view){
         if(setUserFromViewAddressInfo()){
-            getUserAsyncTask().execute(currentUser);
+            try {
+                getUserAsyncTask().execute(currentUser);
+            } catch (ConnectException e) {
+                showToastLong(getString(R.string.connetion_server_failed));
+            }
         }
 
     }
 
     public void deleteUser(View view){
+        showDialogYesOrNo(positiveDeleteUser, cancelDialog, getString(R.string.delete_user_message_dialog));
+    }
 
+    private class DeleteUserOnClickListener implements DialogInterface.OnClickListener{
+
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            try {
+                getDeleteUserAsyncTask().execute(currentUser);
+            } catch (ConnectException e) {
+                showToastLong(getString(R.string.connetion_server_failed));
+            }
+        }
+    }
+
+    private DeleteUserAsyncTask getDeleteUserAsyncTask() throws ConnectException {
+        verifyInternetConnection();
+        return new DeleteUserAsyncTask();
     }
 
     private class DeleteUserAsyncTask extends AsyncTask<User, Void, Boolean>{
@@ -53,7 +79,7 @@ public class EditActivity extends DelivariusActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog.setMessage(getString(R.string.registering_user_message_progress));
+            progressDialog.setMessage(getString(R.string.deleting_user_message_progress));
             progressDialog.show();
         }
 
@@ -82,13 +108,18 @@ public class EditActivity extends DelivariusActivity {
 
     }
 
+    public void returnToHome(View view) {
+        finishActivity(RESULT_OK, null);
+    }
+
     public void finishActivity(int resultCode, String message){
         getIntent().putExtra(RESULT_MESSAGE, message);
         setResult(resultCode,getIntent());
         finish();
     }
 
-    private EditUserAsyncTask getUserAsyncTask(){
+    private EditUserAsyncTask getUserAsyncTask() throws ConnectException {
+        verifyInternetConnection();
         return new EditUserAsyncTask();
     }
 

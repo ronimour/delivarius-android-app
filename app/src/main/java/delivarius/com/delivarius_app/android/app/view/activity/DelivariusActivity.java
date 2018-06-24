@@ -15,7 +15,10 @@ import com.delivarius.delivarius_api.service.ServiceLocator;
 import com.delivarius.delivarius_api.service.UserService;
 import com.delivarius.delivarius_api.service.exception.ServiceException;
 
+import java.net.ConnectException;
+
 import delivarius.com.delivarius_app.R;
+import delivarius.com.delivarius_app.android.app.view.util.ConnectionUtil;
 
 public class DelivariusActivity extends Activity {
 
@@ -50,10 +53,17 @@ public class DelivariusActivity extends Activity {
     protected static User currentUser = null;
 
 
+    protected void verifyInternetConnection() throws ConnectException{
+        if(ConnectionUtil.isDelivariusServerAvailable(this))
+            throw new ConnectException();
+
+    }
+
     public UserService getUserService() throws ServiceException {
         if(userService == null){
             userService = (UserService) ServiceLocator.getInstance().getService(UserService.class);
-            userService.setUrlBase("http://10.0.2.2:8081");
+            //userService.setUrlBase("http://10.0.2.2:8080");
+            userService.setUrlBase(ConnectionUtil.DELIVARIUS_ADDRESS);
         }
         return userService;
     }

@@ -118,7 +118,9 @@
             android:layout_marginRight="50dp"
             android:layout_marginTop="20dp"
             android:drawableTop="@drawable/trash_icon_56"
-            android:text="@string/delete_account_edit_menu" />
+            android:text="@string/delete_account_edit_menu"
+            android:onClick="deleteUser"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -128,7 +130,8 @@
             android:layout_marginRight="50dp"
             android:layout_marginTop="20dp"
             android:drawableTop="@drawable/reply_icon_56"
-            android:text="@string/back_edit_menu_label" />
+            android:text="@string/back_edit_menu_label"
+            android:onClick="returnToHome" />
 
     </LinearLayout>
 

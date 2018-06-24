@@ -59,5 +59,8 @@
     <string name="fail_update_user">Falha ao atualizar o usuário</string>
     <string name="success_delete_user">Conta deletada com sucesso</string>
     <string name="fail_delete_user">Falha ao deletar conta</string>
+    <string name="delete_user_message_dialog">Deseja realmente deletar a conta?</string>
+    <string name="deleting_user_message_progress">Deletando a conta...</string>
+    <string name="connetion_server_failed">Conexão com o servidor falhou</string>
 
 </resources>

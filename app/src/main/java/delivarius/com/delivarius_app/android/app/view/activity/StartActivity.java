@@ -14,6 +14,8 @@ import com.delivarius.delivarius_api.dto.User;
 import com.delivarius.delivarius_api.service.UserService;
 import com.delivarius.delivarius_api.service.exception.ServiceException;
 
+import java.net.ConnectException;
+
 import delivarius.com.delivarius_app.R;
 import delivarius.com.delivarius_app.android.app.view.helper.ViewHelper;
 
@@ -25,14 +27,17 @@ public class StartActivity extends DelivariusActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_activity);
 
-        SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
-        if (preferences.contains(REMEMBER_LOGIN) && preferences.getBoolean(REMEMBER_LOGIN, false)) {
-            Long userId = preferences.getLong(USER_ID, 0);
-            if (userId > 0) {
-                getAutoLoginAsyncTask().execute(userId.toString());
+        try {
+            SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
+            if (preferences.contains(REMEMBER_LOGIN) && preferences.getBoolean(REMEMBER_LOGIN, false)) {
+                Long userId = preferences.getLong(USER_ID, 0);
+                if (userId > 0) {
+                    getAutoLoginAsyncTask().execute(userId.toString());
+                }
             }
+        } catch (ConnectException e) {
+            showToastLong(getString(R.string.connetion_server_failed));
         }
-
     }
 
     public void register(View view) {
@@ -47,7 +52,11 @@ public class StartActivity extends DelivariusActivity {
         if (ViewHelper.isAnyEmpty(loginText, passwordText)) {
             showToastLong(getString(R.string.login_password_empty_error));
         } else {
-            getLoginAsyncTask().execute(loginText.getText().toString(), passwordText.getText().toString());
+            try {
+                getLoginAsyncTask().execute(loginText.getText().toString(), passwordText.getText().toString());
+            } catch (ConnectException e) {
+                showToastLong(getString(R.string.connetion_server_failed));
+            }
         }
     }
 
@@ -68,11 +77,13 @@ public class StartActivity extends DelivariusActivity {
         }
     }
 
-    private LoginAsyncTask getLoginAsyncTask() {
+    private LoginAsyncTask getLoginAsyncTask() throws ConnectException {
+        verifyInternetConnection();
         return new LoginAsyncTask();
     }
 
-    private AutoLoginAsyncTask getAutoLoginAsyncTask() {
+    private AutoLoginAsyncTask getAutoLoginAsyncTask() throws ConnectException {
+        verifyInternetConnection();
         return new AutoLoginAsyncTask();
     }
 
@@ -137,7 +148,7 @@ public class StartActivity extends DelivariusActivity {
             editor.putBoolean(REMEMBER_LOGIN, false);
             editor.apply();
         }
-        String message = data.getStringExtra(RESULT_MESSAGE);
+        String message = data != null ? data.getStringExtra(RESULT_MESSAGE) : "";
         switch (requestCode) {
 
             case REGISTER_REQUEST_CODE:
@@ -148,7 +159,7 @@ public class StartActivity extends DelivariusActivity {
                 }
                 break;
             case HOME_REQUEST_CODE:
-                if(resultCode == RESULT_SUCCESS){
+                if (resultCode == RESULT_SUCCESS) {
                     showToastShort(message);
                 }
                 break;
