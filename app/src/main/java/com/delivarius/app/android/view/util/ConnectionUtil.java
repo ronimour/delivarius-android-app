@@ -1,4 +1,4 @@
-package delivarius.com.delivarius_app.android.app.view.util;
+package com.delivarius.app.android.view.util;
 
 import android.app.Activity;
 import android.content.Context;

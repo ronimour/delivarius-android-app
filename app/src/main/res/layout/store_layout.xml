@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/storePictureImageView"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/store_icon_default"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/storeNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/store_name_default"
+            android:textSize="12dp"
+            android:drawablePadding="5dp"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/storePictureImageView"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:id="@+id/storeAddressTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/store_address_default"
+            android:drawableLeft="@drawable/map_marker_icon_12"
+            android:textSize="10dp"
+            android:drawablePadding="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/storeNameTextView"
+            android:layout_toEndOf="@+id/storePictureImageView"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/storePhoneTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/store_phone_default"
+            android:drawableLeft="@drawable/phone_icon_12"
+            android:textSize="10dp"
+            android:drawablePadding="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/storeAddressTextView"
+            android:layout_toEndOf="@+id/storePictureImageView"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/storeStatusTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/storePhoneTextView"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/storePictureImageView"
+            android:text="@string/store_opentime_default"
+            android:drawableLeft="@drawable/clock_icon_12"
+            android:textColor="@color/darkGreen"
+            android:drawablePadding="5dp"
+            android:textSize="10dp" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,4 +1,4 @@
-package delivarius.com.delivarius_app.android.app.view.activity;
+package com.delivarius.app.android.view.activity;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -12,13 +12,12 @@ import android.widget.EditText;
 import com.delivarius.delivarius_api.dto.Address;
 import com.delivarius.delivarius_api.dto.Phone;
 import com.delivarius.delivarius_api.dto.User;
-import com.delivarius.delivarius_api.service.UserService;
 import com.delivarius.delivarius_api.service.exception.ServiceException;
 
 import java.net.ConnectException;
 
 import delivarius.com.delivarius_app.R;
-import delivarius.com.delivarius_app.android.app.view.helper.ViewHelper;
+import com.delivarius.app.android.view.helper.ViewHelper;
 
 
 public class RegistrationActivity extends DelivariusActivity {

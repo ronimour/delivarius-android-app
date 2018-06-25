@@ -62,5 +62,10 @@
     <string name="delete_user_message_dialog">Deseja realmente deletar a conta?</string>
     <string name="deleting_user_message_progress">Deletando a conta...</string>
     <string name="connetion_server_failed">Conexão com o servidor falhou</string>
+    <string name="store_address_default">Av. Senador Salgado Filho, 7733, Lagoa Nova, 59076-440</string>
+    <string name="store_phone_default">(84) 3222-5586</string>
+    <string name="store_name_default">Conveniência do Seu João 24h</string>
+    <string name="open">Aberto</string>
+    <string name="store_opentime_default"> Aberto 08-22h</string>
 
 </resources>

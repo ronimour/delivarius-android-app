@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="delivarius.com.delivarius_app">
+    package="com.delivarius.app">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
 
-        <activity android:name=".android.app.view.activity.StartActivity">
+        <activity android:name=".android.view.activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".android.app.view.activity.RegistrationActivity">
+        <activity android:name=".android.view.activity.RegistrationActivity">
             <intent-filter>
                 <action android:name="com.delivarius.app.REGISTRATION" />
 
@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".android.app.view.activity.HomeActivity">
+        <activity android:name=".android.view.activity.HomeActivity">
             <intent-filter>
                 <action android:name="com.delivarius.app.HOME" />
 
@@ -37,7 +37,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".android.app.view.activity.EditActivity">
+        <activity android:name=".android.view.activity.EditActivity">
             <intent-filter>
                 <action android:name="com.delivarius.app.EDIT" />
 

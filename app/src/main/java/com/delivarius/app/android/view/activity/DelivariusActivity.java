@@ -1,13 +1,10 @@
-package delivarius.com.delivarius_app.android.app.view.activity;
+package com.delivarius.app.android.view.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.delivarius.delivarius_api.dto.User;
@@ -18,7 +15,7 @@ import com.delivarius.delivarius_api.service.exception.ServiceException;
 import java.net.ConnectException;
 
 import delivarius.com.delivarius_app.R;
-import delivarius.com.delivarius_app.android.app.view.util.ConnectionUtil;
+import com.delivarius.app.android.view.util.ConnectionUtil;
 
 public class DelivariusActivity extends Activity {
 

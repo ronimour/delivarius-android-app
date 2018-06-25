@@ -1,4 +1,4 @@
-package delivarius.com.delivarius_app;
+package com.delivarius.app;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

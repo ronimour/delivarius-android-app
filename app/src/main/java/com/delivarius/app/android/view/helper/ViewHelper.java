@@ -1,4 +1,4 @@
-package delivarius.com.delivarius_app.android.app.view.helper;
+package com.delivarius.app.android.view.helper;
 
 import android.support.annotation.NonNull;
 import android.widget.EditText;
