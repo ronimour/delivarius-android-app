@@ -4,8 +4,14 @@
     android:layout_height="match_parent">
 
 
+    <ViewStub
+        android:id="@+id/storeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
     <SearchView
-        android:id="@+id/storeSearchView"
+        android:id="@+id/productSearchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -13,7 +19,7 @@
         />
 
     <ListView
-        android:id="@+id/storeListView"
+        android:id="@+id/productListView"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"/>
 

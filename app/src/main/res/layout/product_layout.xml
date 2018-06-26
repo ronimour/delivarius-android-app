@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent">
 
     <RelativeLayout
@@ -9,41 +9,40 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/storePictureImageView"
+            android:id="@+id/productPictureImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_margin="10dp"
-            android:src="@drawable/ic_missing_image" />
+            android:src="@drawable/ic_missing_image_small" />
 
         <TextView
-            android:id="@+id/storeNameTextView"
+            android:id="@+id/productNameTextView"
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_toEndOf="@+id/storePictureImageView"
+            android:layout_toEndOf="@+id/productPictureImageView"
             android:drawablePadding="5dp"
-            android:text="@string/store_name_default"
+            android:text="@string/product_name_default"
             android:textSize="12dp" />
 
         <TextView
-            android:id="@+id/storeAddressTextView"
+            android:id="@+id/productDescriptionTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/storeNameTextView"
-            android:layout_marginEnd="42dp"
+            android:layout_below="@id/productNameTextView"
+            android:layout_marginEnd="49dp"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/storePictureImageView"
-            android:drawableLeft="@drawable/ic_map_marker_alt"
+            android:layout_toEndOf="@+id/productPictureImageView"
             android:drawablePadding="5dp"
-            android:text="@string/store_address_default"
+            android:text="@string/product_description_default"
             android:textSize="10dp" />
 
         <TextView
@@ -51,43 +50,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/storeAddressTextView"
-            android:layout_marginEnd="43dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/storePictureImageView"
-            android:drawableLeft="@drawable/ic_phone"
-            android:drawablePadding="5dp"
-            android:text="@string/store_phone_default"
-            android:textSize="10dp" />
-
-        <TextView
-            android:id="@+id/storeStatusTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/productPriceTextView"
+            android:layout_below="@id/productDescriptionTextView"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/storePictureImageView"
-            android:drawableLeft="@drawable/ic_clock"
+            android:layout_toEndOf="@+id/productPictureImageView"
+            android:drawableLeft="@drawable/ic_dollar_sign"
             android:drawablePadding="5dp"
-            android:text="@string/store_opentime_default"
-            android:textColor="@color/darkGreen"
-            android:textSize="10dp" />
+            android:text="@string/product_price_default"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:textSize="12dp" />
 
         <ImageView
             android:id="@+id/addCartImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="13dp"
-            android:src="@drawable/ic_sign_in_alt"
-            />
-
+            android:src="@drawable/ic_cart_plus" />
 
     </RelativeLayout>
+
 
 </LinearLayout>

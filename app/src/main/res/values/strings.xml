@@ -67,5 +67,9 @@
     <string name="store_name_default">Conveniência do Seu João 24h</string>
     <string name="open">Aberto</string>
     <string name="store_opentime_default"> Aberto 08-22h</string>
+    <string name="product_name_default">Água mineral Indaiá</string>
+    <string name="product_description_default">Garrafão de água mineral de 20 litros</string>
+    <string name="product_price_default">19,99</string>
+    <string name="search_store_hint">Buscar loja</string>
 
 </resources>

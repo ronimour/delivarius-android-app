@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.delivarius.delivarius_api.dto.User;
 
-import delivarius.com.delivarius_app.R;
+import com.delivarius.app.R;
 
 public class HomeActivity extends DelivariusActivity {
 

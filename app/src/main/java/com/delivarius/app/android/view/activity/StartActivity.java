@@ -15,7 +15,7 @@ import com.delivarius.delivarius_api.service.exception.ServiceException;
 
 import java.net.ConnectException;
 
-import delivarius.com.delivarius_app.R;
+import com.delivarius.app.R;
 import com.delivarius.app.android.view.helper.ViewHelper;
 
 public class StartActivity extends DelivariusActivity {
