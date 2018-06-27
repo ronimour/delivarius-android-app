@@ -34,7 +34,7 @@ public class HomeActivity extends DelivariusActivity {
 
     public void searchProducts(View view){
         Intent intent = new Intent("com.delivarius.app.SHOPPING");
-        startActivityForResult(intent, EDIT_REQUEST_CODE);
+        startActivityForResult(intent, SHOPPING_REQUEST_CODE);
     }
 
 

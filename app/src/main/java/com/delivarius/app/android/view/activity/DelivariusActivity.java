@@ -28,6 +28,8 @@ public class DelivariusActivity extends Activity {
 
     public static final int EDIT_REQUEST_CODE = 3;
 
+    public static final int SHOPPING_REQUEST_CODE = 4;
+
     public static final int RESULT_SUCCESS = 1000;
 
     public static final int RESULT_FAIL = -1001;
@@ -53,6 +55,8 @@ public class DelivariusActivity extends Activity {
     protected StoreService storeService = null;
 
     protected static User currentUser = null;
+
+    private ProgressDialog progressDialog = null;
 
 
     protected void verifyInternetConnection() throws ConnectException{
@@ -97,6 +101,16 @@ public class DelivariusActivity extends Activity {
         alert.show();
     }
 
+    protected void showProcessDialog(Activity activity, String waitMessage){
+        progressDialog = new ProgressDialog(activity);
+        progressDialog.setMessage(getString(R.string.loading_stores_wait_message));
+        progressDialog.show();
+    }
+
+    protected void dismissProcessDialog(){
+        if(progressDialog != null)
+            progressDialog.dismiss();
+    }
 
     protected class CancelDialogOnClickListener implements DialogInterface.OnClickListener{
         @Override
@@ -125,6 +139,7 @@ public class DelivariusActivity extends Activity {
         }
 
     }
+
 
 
     protected abstract class ConnectionAsyncTask extends AsyncTask<Object, Void, Object> {
@@ -156,6 +171,8 @@ public class DelivariusActivity extends Activity {
             progressDialog.dismiss();
         }
     }
+
+
 
 
 }

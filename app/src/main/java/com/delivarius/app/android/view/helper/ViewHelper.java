@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.delivarius.api.dto.Product;
 import com.delivarius.app.R;
 import com.delivarius.api.dto.Store;
 
@@ -28,12 +29,26 @@ public class ViewHelper {
 
         TextView nameTextView = (TextView) rowView.findViewById(R.id.storeNameTextView);
         TextView addressTextView = (TextView) rowView.findViewById(R.id.storeAddressTextView);
-        ImageView storePictureTextView = (ImageView) rowView.findViewById(R.id.storePictureImageView);
+        ImageView pictureImageView = (ImageView) rowView.findViewById(R.id.storePictureImageView);
 
         nameTextView.setText(store.getName());
-        storePictureTextView.setTag(store);
+        pictureImageView.setTag(store);
         addressTextView.setText(store.getAddress().getStreet()+", "+store.getAddress().getZipCode());
-        ImageViewHelper.setImageViewStore(storePictureTextView,store.getPicture());
+        ImageViewHelper.setImageViewStore(pictureImageView,store.getPicture());
+    }
+
+    public static void inflateView(View rowView, Product product){
+
+        TextView nameTextView = (TextView) rowView.findViewById(R.id.productNameTextView);
+        TextView descriptionTextView = (TextView) rowView.findViewById(R.id.productDescriptionTextView);
+        TextView priceTextView = (TextView) rowView.findViewById(R.id.productPriceTextView);
+        ImageView pictureImageView = (ImageView) rowView.findViewById(R.id.productPictureImageView);
+
+        nameTextView.setText(product.getName());
+        descriptionTextView.setText(product.getDescription());
+        priceTextView.setText(product.getPrice().toString());
+        pictureImageView.setTag(product);
+        ImageViewHelper.setImageViewProduct(pictureImageView,product.getPicture());
     }
 
 
