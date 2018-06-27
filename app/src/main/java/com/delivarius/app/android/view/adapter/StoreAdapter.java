@@ -10,17 +10,17 @@ import android.widget.ArrayAdapter;
 
 import com.delivarius.app.R;
 import com.delivarius.app.android.view.helper.ViewHelper;
-import com.delivarius.delivarius_api.dto.Store;
+import com.delivarius.api.dto.Store;
 
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class StoreAdapter extends ArrayAdapter<Store> {
 
-    private ArrayList<Store> list = new ArrayList<>();
+    private List<Store> list = null;
     LayoutInflater inflater = null;
 
-    public StoreAdapter(@NonNull Context context, @NonNull ArrayList<Store> objects) {
+    public StoreAdapter(@NonNull Context context, @NonNull List<Store> objects) {
         super(context, R.layout.store_layout, objects);
         this.inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);

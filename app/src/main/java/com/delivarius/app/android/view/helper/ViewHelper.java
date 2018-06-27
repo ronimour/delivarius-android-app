@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.delivarius.app.R;
-import com.delivarius.delivarius_api.dto.Store;
+import com.delivarius.api.dto.Store;
 
 public class ViewHelper {
 
@@ -31,6 +31,7 @@ public class ViewHelper {
         ImageView storePictureTextView = (ImageView) rowView.findViewById(R.id.storePictureImageView);
 
         nameTextView.setText(store.getName());
+        storePictureTextView.setTag(store);
         addressTextView.setText(store.getAddress().getStreet()+", "+store.getAddress().getZipCode());
         ImageViewHelper.setImageViewStore(storePictureTextView,store.getPicture());
     }

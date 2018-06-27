@@ -2,15 +2,18 @@ package com.delivarius.app.android.view.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.view.View;
 import android.widget.Toast;
 
-import com.delivarius.delivarius_api.dto.User;
-import com.delivarius.delivarius_api.service.ServiceLocator;
-import com.delivarius.delivarius_api.service.UserService;
-import com.delivarius.delivarius_api.service.exception.ServiceException;
+import com.delivarius.api.dto.User;
+import com.delivarius.api.service.ServiceLocator;
+import com.delivarius.api.service.StoreService;
+import com.delivarius.api.service.UserService;
+import com.delivarius.api.service.exception.ServiceException;
 
 import java.net.ConnectException;
 
@@ -47,6 +50,8 @@ public class DelivariusActivity extends Activity {
 
     protected UserService userService = null;
 
+    protected StoreService storeService = null;
+
     protected static User currentUser = null;
 
 
@@ -59,10 +64,17 @@ public class DelivariusActivity extends Activity {
     public UserService getUserService() throws ServiceException {
         if(userService == null){
             userService = (UserService) ServiceLocator.getInstance().getService(UserService.class);
-            //userService.setUrlBase("http://10.0.2.2:8080");
             userService.setUrlBase(ConnectionUtil.DELIVARIUS_ADDRESS);
         }
         return userService;
+    }
+
+    public StoreService getStoreService() throws ServiceException {
+        if(storeService == null){
+            storeService = (StoreService) ServiceLocator.getInstance().getService(StoreService.class);
+            storeService.setUrlBase(ConnectionUtil.DELIVARIUS_ADDRESS);
+        }
+        return storeService;
     }
 
     protected void showToastShort(String message) {
@@ -113,4 +125,37 @@ public class DelivariusActivity extends Activity {
         }
 
     }
+
+
+    protected abstract class ConnectionAsyncTask extends AsyncTask<Object, Void, Object> {
+
+
+        ProgressDialog progressDialog = new ProgressDialog(DelivariusActivity.this);
+
+        private String waitMessage = getString(R.string.wait_message_default);
+
+        public String getWaitMessage() {
+            return waitMessage;
+        }
+
+        public void setWaitMessage(String waitMessage) {
+            this.waitMessage = waitMessage;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog.setMessage(getWaitMessage());
+            progressDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(Object object) {
+            super.onPostExecute(object);
+            progressDialog.dismiss();
+        }
+    }
+
+
 }

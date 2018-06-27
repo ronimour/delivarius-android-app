@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.delivarius.delivarius_api.dto.User;
-import com.delivarius.delivarius_api.service.exception.ServiceException;
+import com.delivarius.api.dto.User;
+import com.delivarius.api.service.exception.ServiceException;
 
 import java.net.ConnectException;
 

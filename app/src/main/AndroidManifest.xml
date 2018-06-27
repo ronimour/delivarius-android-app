@@ -45,6 +45,14 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".android.view.activity.ShoppingActivity">
+            <intent-filter>
+                <action android:name="com.delivarius.app.SHOPPING" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

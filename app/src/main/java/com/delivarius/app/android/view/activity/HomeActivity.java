@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.delivarius.delivarius_api.dto.User;
+import com.delivarius.api.dto.User;
 
 import com.delivarius.app.R;
 
@@ -30,6 +30,14 @@ public class HomeActivity extends DelivariusActivity {
         Intent intent = new Intent("com.delivarius.app.EDIT");
         startActivityForResult(intent, EDIT_REQUEST_CODE);
     }
+
+
+    public void searchProducts(View view){
+        Intent intent = new Intent("com.delivarius.app.SHOPPING");
+        startActivityForResult(intent, EDIT_REQUEST_CODE);
+    }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
