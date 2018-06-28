@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewStub;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -32,11 +33,11 @@ public class ShoppingActivity extends DelivariusActivity {
     private List<Product> productList = null;
     private ListView productListView = null;
 
+    private final ReturnToStoreOnClicListener returnToStoreOnClicListener = new ReturnToStoreOnClicListener();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_store_activity);
 
         try {
             getLoadStoresAsyncTask().execute();
@@ -51,19 +52,30 @@ public class ShoppingActivity extends DelivariusActivity {
         if(selectedStore != null){
             setContentView(R.layout.list_product_activity);
 
-            ViewStub viewStub = (ViewStub) findViewById(R.id.storeView);
-            viewStub.setLayoutResource(R.layout.store_layout);
-            viewStub.inflate();
-            ViewHelper.inflateView(viewStub, selectedStore);
+
+            LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View storeView = inflater.inflate(R.layout.store_layout, null, false);
+            ImageView actionIcon = storeView.findViewById(R.id.selectStoreImageView);
+            actionIcon.setImageDrawable(getDrawable(R.drawable.ic_reply));
+            actionIcon.setOnClickListener(returnToStoreOnClicListener);
+            ViewHelper.inflateView(storeView,selectedStore);
+            LinearLayout storeLinearLayout = findViewById(R.id.storeLinearLayout);
+            storeLinearLayout.addView(storeView);
 
             productList = selectedStore.getProducts();
             productAdapter = new ProductAdapter(ShoppingActivity.this, productList);
             productListView = findViewById(R.id.productListView);
-            productListView.setAdapter(storeAdapter);
+            productListView.setAdapter(productAdapter);
 
         }
     }
 
+    private class ReturnToStoreOnClicListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            loadStores(storeList);
+        }
+    }
 
     private LoadStoresAsyncTask getLoadStoresAsyncTask() throws ConnectException {
         verifyInternetConnection();
@@ -71,8 +83,6 @@ public class ShoppingActivity extends DelivariusActivity {
     }
 
     private class LoadStoresAsyncTask extends AsyncTask<Void,Void, List<Store>> {
-
-
 
         @Override
         protected void onPreExecute() {
@@ -98,16 +108,20 @@ public class ShoppingActivity extends DelivariusActivity {
             dismissProcessDialog();
             super.onPostExecute(_storeList);
             if(_storeList != null){
-                storeList = _storeList;
-                storeAdapter = new StoreAdapter(ShoppingActivity.this, storeList );
-                storeListView = findViewById(R.id.storeListView);
-                storeListView.setAdapter(storeAdapter);
+                loadStores(_storeList);
             } else {
                 showToastLong(getString(R.string.fail_load_stores));
             }
         }
     }
 
+    private void loadStores(List<Store> _storeList){
+        setContentView(R.layout.list_store_activity);
+        storeList = _storeList;
+        storeAdapter = new StoreAdapter(ShoppingActivity.this, storeList );
+        storeListView = findViewById(R.id.storeListView);
+        storeListView.setAdapter(storeAdapter);
+    }
 
 
 

@@ -30,11 +30,12 @@ public class ViewHelper {
         TextView nameTextView = (TextView) rowView.findViewById(R.id.storeNameTextView);
         TextView addressTextView = (TextView) rowView.findViewById(R.id.storeAddressTextView);
         ImageView pictureImageView = (ImageView) rowView.findViewById(R.id.storePictureImageView);
+        ImageView selectStoreImageView = (ImageView) rowView.findViewById(R.id.selectStoreImageView);
 
         nameTextView.setText(store.getName());
-        pictureImageView.setTag(store);
         addressTextView.setText(store.getAddress().getStreet()+", "+store.getAddress().getZipCode());
         ImageViewHelper.setImageViewStore(pictureImageView,store.getPicture());
+        selectStoreImageView.setTag(store);
     }
 
     public static void inflateView(View rowView, Product product){
