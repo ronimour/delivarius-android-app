@@ -38,19 +38,39 @@ public class ViewHelper {
         selectStoreImageView.setTag(store);
     }
 
-    public static void inflateView(View rowView, Product product){
+    public static void inflateView(View rowView, Product product, int layoutResource){
 
+        //shared views
         TextView nameTextView = (TextView) rowView.findViewById(R.id.productNameTextView);
-        TextView descriptionTextView = (TextView) rowView.findViewById(R.id.productDescriptionTextView);
         TextView priceTextView = (TextView) rowView.findViewById(R.id.productPriceTextView);
         ImageView pictureImageView = (ImageView) rowView.findViewById(R.id.productPictureImageView);
-        ImageView addCartImageView = (ImageView) rowView.findViewById(R.id.addCartImageView);
 
         nameTextView.setText(product.getName());
-        descriptionTextView.setText(product.getDescription());
         priceTextView.setText(product.getPrice().toString());
-        addCartImageView.setTag(product);
-        ImageViewHelper.setImageViewProduct(pictureImageView,product.getPicture());
+        ImageViewHelper.setImageViewProduct(pictureImageView, product.getPicture());
+
+        //specific views
+        switch (layoutResource) {
+            case R.layout.product_layout:
+                TextView descriptionTextView = (TextView) rowView.findViewById(R.id.productDescriptionTextView);
+                ImageView addCartImageView = (ImageView) rowView.findViewById(R.id.addCartImageView);
+
+                descriptionTextView.setText(product.getDescription());
+                addCartImageView.setTag(product);
+                break;
+            case R.layout.item_order_product_layout:
+                ImageView removeCartImageView = (ImageView) rowView.findViewById(R.id.removeCartImageView);
+                ImageView incrementProductImageView = (ImageView) rowView.findViewById(R.id.incrementProductImageView);
+                ImageView decrementProductImageView = (ImageView) rowView.findViewById(R.id.decrementProductImageView);
+
+                removeCartImageView.setTag(product);
+                incrementProductImageView.setTag(product);
+                decrementProductImageView.setTag(product);
+                break;
+            default:
+                break;
+
+        }
     }
 
 

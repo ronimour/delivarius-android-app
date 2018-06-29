@@ -33,7 +33,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         View rowView = inflater.inflate(R.layout.product_layout, parent, false);
         Product product = list.get(position);
 
-        ViewHelper.inflateView(rowView,product);
+        ViewHelper.inflateView(rowView,product, R.layout.product_layout);
 
         return rowView;
     }
