@@ -1,13 +1,11 @@
 package com.delivarius.app.android.view.activity;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -18,6 +16,7 @@ import com.delivarius.app.R;
 import com.delivarius.app.android.view.adapter.ProductAdapter;
 import com.delivarius.app.android.view.adapter.StoreAdapter;
 import com.delivarius.api.dto.Store;
+import com.delivarius.app.android.view.helper.OrderHelper;
 import com.delivarius.app.android.view.helper.ViewHelper;
 
 import java.net.ConnectException;
@@ -33,7 +32,7 @@ public class ShoppingActivity extends DelivariusActivity {
     private List<Product> productList = null;
     private ListView productListView = null;
 
-    private final ReturnToStoreOnClicListener returnToStoreOnClicListener = new ReturnToStoreOnClicListener();
+    private final ReturnToStoreOnClickListener returnToStoreOnClickListener = new ReturnToStoreOnClickListener();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,7 +56,7 @@ public class ShoppingActivity extends DelivariusActivity {
             View storeView = inflater.inflate(R.layout.store_layout, null, false);
             ImageView actionIcon = storeView.findViewById(R.id.selectStoreImageView);
             actionIcon.setImageDrawable(getDrawable(R.drawable.ic_reply));
-            actionIcon.setOnClickListener(returnToStoreOnClicListener);
+            actionIcon.setOnClickListener(returnToStoreOnClickListener);
             ViewHelper.inflateView(storeView,selectedStore);
             LinearLayout storeLinearLayout = findViewById(R.id.storeLinearLayout);
             storeLinearLayout.addView(storeView);
@@ -67,10 +66,17 @@ public class ShoppingActivity extends DelivariusActivity {
             productListView = findViewById(R.id.productListView);
             productListView.setAdapter(productAdapter);
 
+            OrderHelper.setStore(currentOrder, selectedStore);
+
         }
     }
 
-    private class ReturnToStoreOnClicListener implements View.OnClickListener{
+    public void addProductToCart(View view){
+
+
+    }
+
+    private class ReturnToStoreOnClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
             loadStores(storeList);

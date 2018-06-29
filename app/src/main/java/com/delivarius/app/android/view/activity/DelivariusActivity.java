@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.Toast;
 
+import com.delivarius.api.dto.Order;
 import com.delivarius.api.dto.User;
 import com.delivarius.api.service.ServiceLocator;
 import com.delivarius.api.service.StoreService;
@@ -55,6 +56,8 @@ public class DelivariusActivity extends Activity {
     protected StoreService storeService = null;
 
     protected static User currentUser = null;
+
+    protected static final Order currentOrder = new Order();
 
     private ProgressDialog progressDialog = null;
 

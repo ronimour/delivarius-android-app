@@ -22,6 +22,7 @@ public class HomeActivity extends DelivariusActivity {
         if(currentUser != null){
             TextView userMenuHome = (TextView) findViewById(R.id.userHomeMenu);
             userMenuHome.setText(currentUser.getLogin());
+            currentOrder.setUser(currentUser);
         }
 
     }

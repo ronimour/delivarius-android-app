@@ -74,5 +74,7 @@
     <string name="wait_message_default">Carregando...</string>
     <string name="loading_stores_wait_message">Carregando lojas...</string>
     <string name="fail_load_stores">Falha ao carregar as lojas</string>
+    <string name="total_label">Total:</string>
+    <string name="conclude_order_label">Concluir</string>
 
 </resources>

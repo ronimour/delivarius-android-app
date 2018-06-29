@@ -15,6 +15,10 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_margin="10dp"
+            android:maxHeight="16dp"
+            android:maxWidth="16dp"
+            android:minHeight="16dp"
+            android:minWidth="16dp"
             android:src="@drawable/ic_missing_image_small" />
 
         <TextView
@@ -31,47 +35,60 @@
             android:textSize="12dp" />
 
         <TextView
-            android:id="@+id/productDescriptionTextView"
+            android:id="@+id/productPriceTextView"
+            style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@id/productNameTextView"
-            android:layout_marginEnd="49dp"
+            android:layout_marginEnd="165dp"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/productPictureImageView"
-            android:drawablePadding="5dp"
-            android:text="@string/product_description_default"
-            android:textSize="10dp" />
-
-        <TextView
-            android:id="@+id/productPriceTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/productDescriptionTextView"
-            android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/productPictureImageView"
             android:drawableLeft="@drawable/ic_dollar_sign"
             android:drawablePadding="5dp"
             android:text="@string/product_price_default"
-            style="@style/TextAppearance.AppCompat.Title"
             android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/amountProductTextView"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="24dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="77dp"
+            android:text="10"
+            android:textSize="14dp" />
 
         <ImageView
             android:id="@+id/addCartImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_cart_plus"
-            android:onClick="addProductToCart"
-            />
+            android:layout_margin="20dp"
+            android:src="@drawable/ic_times_circle" />
+
+        <ImageView
+            android:id="@+id/incrementProductImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/amountProductTextView"
+            android:layout_alignTop="@+id/productPictureImageView"
+            android:src="@drawable/ic_caret_up" />
+
+        <ImageView
+            android:id="@+id/decrementProductImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/productPictureImageView"
+            android:layout_alignEnd="@+id/amountProductTextView"
+            android:src="@drawable/ic_caret_down" />
 
     </RelativeLayout>
+
 
 
 </LinearLayout>

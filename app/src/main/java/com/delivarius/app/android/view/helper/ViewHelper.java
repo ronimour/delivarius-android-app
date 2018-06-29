@@ -44,11 +44,12 @@ public class ViewHelper {
         TextView descriptionTextView = (TextView) rowView.findViewById(R.id.productDescriptionTextView);
         TextView priceTextView = (TextView) rowView.findViewById(R.id.productPriceTextView);
         ImageView pictureImageView = (ImageView) rowView.findViewById(R.id.productPictureImageView);
+        ImageView addCartImageView = (ImageView) rowView.findViewById(R.id.addCartImageView);
 
         nameTextView.setText(product.getName());
         descriptionTextView.setText(product.getDescription());
         priceTextView.setText(product.getPrice().toString());
-        pictureImageView.setTag(product);
+        addCartImageView.setTag(product);
         ImageViewHelper.setImageViewProduct(pictureImageView,product.getPicture());
     }
 
