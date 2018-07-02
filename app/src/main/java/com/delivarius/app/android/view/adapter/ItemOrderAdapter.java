@@ -8,19 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import com.delivarius.api.dto.Product;
+import com.delivarius.api.dto.ItemOrder;
 import com.delivarius.app.android.view.helper.ViewHelper;
 
 import java.util.List;
 
-public class ProductAdapter extends ArrayAdapter<Product> {
+public class ItemOrderAdapter extends ArrayAdapter<ItemOrder> {
 
-    private List<Product> list = null;
+    private List<ItemOrder> list = null;
     private LayoutInflater inflater = null;
     private int layoutResource;
+    private Context context = null;
 
-    public ProductAdapter(@NonNull Context context, int layoutResource, @NonNull List<Product> objects) {
+    public ItemOrderAdapter(@NonNull Context context, int layoutResource, @NonNull List<ItemOrder> objects) {
         super(context, layoutResource, objects);
+        this.context = context;
         this.layoutResource = layoutResource;
         this.inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -32,9 +34,9 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         View rowView = inflater.inflate(this.layoutResource, parent, false);
-        Product product = list.get(position);
+        ItemOrder itemOrder = list.get(position);
 
-        ViewHelper.inflateView(rowView, product);
+        ViewHelper.inflateView(rowView, itemOrder, context);
 
         return rowView;
     }

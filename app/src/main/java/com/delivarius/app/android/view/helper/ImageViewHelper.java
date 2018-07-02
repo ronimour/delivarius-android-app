@@ -7,7 +7,7 @@ import com.delivarius.app.R;
 
 public class ImageViewHelper {
 
-    public static void setImageViewProduct(ImageView imageView, String image){
+    public static void setImageView(ImageView imageView, String image){
 
         switch (image) {
             case "agua_mineral_hydrate_20l.png" :
@@ -64,15 +64,6 @@ public class ImageViewHelper {
             case "gelo_qualita_5kg.png" :
                 imageView.setImageResource(R.drawable.gelo_qualita_5kg);
                 break;
-            default:
-                imageView.setImageResource(R.drawable.ic_missing_image_small);
-                break;
-        }
-
-    }
-    public static void setImageViewStore(ImageView imageView, String image){
-
-        switch (image) {
             case "emporio_conveniencia_24h.png" :
                 imageView.setImageResource(R.drawable.emporio_conveniencia_24h);
                 break;
@@ -83,7 +74,7 @@ public class ImageViewHelper {
                 imageView.setImageResource(R.drawable.super_conveniencia_horizonte);
                 break;
             default:
-                imageView.setImageResource(R.drawable.ic_missing_image);
+                imageView.setImageResource(R.drawable.ic_missing_image_small);
                 break;
         }
 

@@ -1,11 +1,14 @@
 package com.delivarius.app.android.view.helper;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.delivarius.api.dto.ItemOrder;
 import com.delivarius.api.dto.Product;
 import com.delivarius.app.R;
 import com.delivarius.api.dto.Store;
@@ -25,8 +28,47 @@ public class ViewHelper {
         return editText.getText() != null && editText.getText().toString().isEmpty();
     }
 
-    public static void inflateView(View rowView, Store store){
+    public static void setVisibility(@NonNull View viewBase, int resource, boolean visible){
+        View view = viewBase.findViewById(resource);
+        if(view != null){
+            view.setVisibility(visible ? View.VISIBLE : View.GONE);
+        }
+    }
 
+    public static void setTextOnTextView(@NonNull View viewBase, int resource, String text){
+        TextView textView = viewBase.findViewById(resource);
+        if(textView != null){
+            textView.setText(text);
+        }
+    }
+
+    public static void setPictureOnImageView(@NonNull View viewBase, int resource, String picture){
+        ImageView imageView = viewBase.findViewById(resource);
+        if(imageView != null){
+            ImageViewHelper.setImageView(imageView, picture);
+        }
+    }
+
+    public static void setPictureOnImageView(@NonNull View viewBase, int resource, String picture, int resourceHeight, int resourceWidth, Context context){
+        ImageView imageView = viewBase.findViewById(resource);
+        if(imageView != null){
+            ImageViewHelper.setImageView(imageView, picture);
+            imageView.getLayoutParams().height = (int) context.getResources().getDimension(resourceHeight);
+            imageView.getLayoutParams().width = (int) context.getResources().getDimension(resourceWidth);
+        }
+    }
+
+    public static void setTag(@NonNull View viewBase, int resource, Object tag){
+        View view = viewBase.findViewById(resource);
+        if(view != null){
+            view.setTag(tag);
+        }
+    }
+
+
+
+    public static void inflateView(View rowView, Store store){
+        //TODO refactor to ViewHelper
         TextView nameTextView = (TextView) rowView.findViewById(R.id.storeNameTextView);
         TextView addressTextView = (TextView) rowView.findViewById(R.id.storeAddressTextView);
         ImageView pictureImageView = (ImageView) rowView.findViewById(R.id.storePictureImageView);
@@ -34,43 +76,29 @@ public class ViewHelper {
 
         nameTextView.setText(store.getName());
         addressTextView.setText(store.getAddress().getStreet()+", "+store.getAddress().getZipCode());
-        ImageViewHelper.setImageViewStore(pictureImageView,store.getPicture());
+        ImageViewHelper.setImageView(pictureImageView,store.getPicture());
         selectStoreImageView.setTag(store);
     }
 
-    public static void inflateView(View rowView, Product product, int layoutResource){
+    public static void inflateView(View rowView, Product product) {
+        ViewHelper.setTextOnTextView(rowView, R.id.productNameTextView, product.getName());
+        ViewHelper.setTextOnTextView(rowView, R.id.productDescriptionTextView, product.getDescription());
+        ViewHelper.setTextOnTextView(rowView, R.id.productPriceTextView, product.getPrice().toString());
+        ViewHelper.setPictureOnImageView(rowView, R.id.productPictureImageView, product.getPicture());
 
-        //shared views
-        TextView nameTextView = (TextView) rowView.findViewById(R.id.productNameTextView);
-        TextView priceTextView = (TextView) rowView.findViewById(R.id.productPriceTextView);
-        ImageView pictureImageView = (ImageView) rowView.findViewById(R.id.productPictureImageView);
+        ViewHelper.setTag(rowView, R.id.addCartImageView, product);
+    }
 
-        nameTextView.setText(product.getName());
-        priceTextView.setText(product.getPrice().toString());
-        ImageViewHelper.setImageViewProduct(pictureImageView, product.getPicture());
+    public static void inflateView(View rowView, ItemOrder itemOrder, Context context) {
+        ViewHelper.setTextOnTextView(rowView, R.id.productNameTextView, itemOrder.getProduct().getName());
+        ViewHelper.setTextOnTextView(rowView, R.id.productPriceTextView, itemOrder.getProduct().getPrice().toString());
+        ViewHelper.setTextOnTextView(rowView, R.id.amountProductTextView, OrderHelper.getAmount(itemOrder));
+        ViewHelper.setPictureOnImageView(rowView, R.id.productPictureImageView, itemOrder.getProduct().getPicture(),
+                R.dimen.medium_dim, R.dimen.medium_dim, context);
 
-        //specific views
-        switch (layoutResource) {
-            case R.layout.product_layout:
-                TextView descriptionTextView = (TextView) rowView.findViewById(R.id.productDescriptionTextView);
-                ImageView addCartImageView = (ImageView) rowView.findViewById(R.id.addCartImageView);
-
-                descriptionTextView.setText(product.getDescription());
-                addCartImageView.setTag(product);
-                break;
-            case R.layout.item_order_product_layout:
-                ImageView removeCartImageView = (ImageView) rowView.findViewById(R.id.removeCartImageView);
-                ImageView incrementProductImageView = (ImageView) rowView.findViewById(R.id.incrementProductImageView);
-                ImageView decrementProductImageView = (ImageView) rowView.findViewById(R.id.decrementProductImageView);
-
-                removeCartImageView.setTag(product);
-                incrementProductImageView.setTag(product);
-                decrementProductImageView.setTag(product);
-                break;
-            default:
-                break;
-
-        }
+        ViewHelper.setTag(rowView, R.id.removeCartImageView, itemOrder);
+        ViewHelper.setTag(rowView, R.id.incrementProductImageView, itemOrder);
+        ViewHelper.setTag(rowView, R.id.decrementProductImageView, itemOrder);
     }
 
 

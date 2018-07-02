@@ -25,6 +25,7 @@ public class StartActivity extends DelivariusActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_activity);
+        loadLogo(R.id.logoLayout);
 
         try {
             SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);

@@ -24,6 +24,8 @@ public class EditActivity extends DelivariusActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_menu_activity);
+        loadMenuBar(true,false, R.id.menuBarLayout);
+        loadLogo(R.id.logoLayout);
     }
 
 

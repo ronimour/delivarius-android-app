@@ -24,7 +24,7 @@
         <TextView
             android:id="@+id/productNameTextView"
             style="@style/TextAppearance.AppCompat.Title"
-            android:layout_width="wrap_content"
+            android:layout_width="193dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
@@ -59,6 +59,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="77dp"
+            android:paddingLeft="3dp"
             android:text="10"
             android:textSize="14dp" />
 
@@ -69,7 +70,9 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_margin="20dp"
-            android:src="@drawable/ic_times_circle" />
+            android:src="@drawable/ic_times_circle"
+            android:onClick="removeProduct"
+            />
 
         <ImageView
             android:id="@+id/incrementProductImageView"
@@ -77,7 +80,9 @@
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/amountProductTextView"
             android:layout_alignTop="@+id/productPictureImageView"
-            android:src="@drawable/ic_caret_up" />
+            android:src="@drawable/ic_caret_up"
+            android:onClick="incrementProduct"
+            />
 
         <ImageView
             android:id="@+id/decrementProductImageView"
@@ -85,7 +90,9 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/productPictureImageView"
             android:layout_alignEnd="@+id/amountProductTextView"
-            android:src="@drawable/ic_caret_down" />
+            android:src="@drawable/ic_caret_down"
+            android:onClick="decrementProduct"
+            />
 
     </RelativeLayout>
 

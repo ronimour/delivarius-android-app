@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item  android:id="@+id/cartItem"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_shopping_cart_s"
+        android:title="@string/cart_item"
+        app:showAsAction="always"
+        />
+    <item  android:id="@+id/logoutItem"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_sign_out_alt_small"
+        android:title="@string/signout_item"
+        app:showAsAction="always"
+        />
+</menu>

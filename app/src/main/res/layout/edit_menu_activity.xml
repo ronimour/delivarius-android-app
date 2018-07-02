@@ -7,44 +7,19 @@
     android:weightSum="1">
 
 
+
     <LinearLayout
+        android:id="@+id/menuBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="right"
-        >
+        />
 
-        <TextView
-            android:id="@+id/userHomeMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="20dp"
-            android:drawableLeft="@drawable/user_icon_24" />
-
-        <TextView
-            android:id="@+id/logoutHomeMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="20dp"
-            android:drawableLeft="@drawable/logout_icon_24"
-            android:text="@string/logout"
-            android:onClick="logout"
-            />
-
-    </LinearLayout>
-
-    <TextView
+    <LinearLayout
+        android:id="@+id/logoLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="50dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_subtitle" />
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -59,7 +34,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="20dp"
-            android:drawableTop="@drawable/user_icon_56"
+            android:drawableTop="@drawable/ic_user_m"
             android:text="@string/personal_info_edit_menu_label" />
 
         <TextView
@@ -69,7 +44,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="20dp"
-            android:drawableTop="@drawable/contact_icon_56"
+            android:drawableTop="@drawable/ic_address_book_m"
             android:text="@string/contact_edit_menu_label" />
 
     </LinearLayout>
@@ -87,7 +62,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="20dp"
-            android:drawableTop="@drawable/padlock_icon_56"
+            android:drawableTop="@drawable/ic_key_m"
             android:text="@string/password_edit_menu_label" />
 
         <TextView
@@ -97,7 +72,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="20dp"
-            android:drawableTop="@drawable/map_marker_icon_56"
+            android:drawableTop="@drawable/ic_map_marker_alt_m"
             android:text="@string/address_edit_menu_label"
             android:onClick="editAddress"
             />
@@ -117,7 +92,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="20dp"
-            android:drawableTop="@drawable/trash_icon_56"
+            android:drawableTop="@drawable/ic_trash_alt_m"
             android:text="@string/delete_account_edit_menu"
             android:onClick="deleteUser"
             />
@@ -129,7 +104,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="20dp"
-            android:drawableTop="@drawable/reply_icon_56"
+            android:drawableTop="@drawable/ic_reply_m"
             android:text="@string/back_edit_menu_label"
             android:onClick="returnToHome" />
 

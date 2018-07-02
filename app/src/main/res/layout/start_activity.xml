@@ -7,16 +7,10 @@
     android:gravity="center_horizontal"
     android:weightSum="1">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/logoLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="50dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_subtitle"
         />
 
     <EditText
@@ -25,6 +19,8 @@
         android:layout_height="wrap_content"
         android:hint="@string/login_hint"
         android:layout_margin="15dp"
+        android:drawableLeft="@drawable/ic_user_s"
+        android:drawablePadding="5dp"
         />
 
     <EditText
@@ -34,6 +30,8 @@
         android:hint="@string/password_hint"
         android:layout_margin="15dp"
         android:inputType="textPassword"
+        android:drawableLeft="@drawable/ic_key_s"
+        android:drawablePadding="5dp"
         />
 
     <CheckBox
@@ -50,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_button"
-        android:drawableLeft="@drawable/login_icon_24"
+        android:drawableLeft="@drawable/ic_sign_in_alt"
         android:layout_margin="20dp"
         android:drawablePadding="5dp"
         android:onClick="login"
@@ -68,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:drawableLeft="@drawable/register_icon_24"
+            android:drawableLeft="@drawable/ic_user_plus"
             android:onClick="register"
             android:drawablePadding="5dp"
             android:text="@string/register_button" />

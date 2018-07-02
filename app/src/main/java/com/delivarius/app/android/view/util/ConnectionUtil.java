@@ -9,7 +9,8 @@ import java.net.InetAddress;
 public class ConnectionUtil {
 
     //public static final String DELIVARIUS_ADDRESS = "https://delivarius.herokuapp.com";
-   public static final String DELIVARIUS_ADDRESS = "http://10.0.2.2:8081";
+   public static final String DELIVARIUS_ADDRESS = "http://192.168.0.28:8081";
+   //public static final String DELIVARIUS_ADDRESS = "http://10.0.2.2:8081";
 
     private static boolean isNetworkConnected(Activity activity) {
         ConnectivityManager cm = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);

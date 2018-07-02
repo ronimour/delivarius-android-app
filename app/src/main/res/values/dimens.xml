@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="xlarge_dim" >128dp</dimen>
+    <dimen name="large_dim" >96dp</dimen>
+    <dimen name="medium_dim" >56dp</dimen>
+    <dimen name="small_dim" >24dp</dimen>
+    <dimen name="xsmall_dim" >12dp</dimen>
+</resources>

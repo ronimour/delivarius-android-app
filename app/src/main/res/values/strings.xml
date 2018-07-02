@@ -76,5 +76,15 @@
     <string name="fail_load_stores">Falha ao carregar as lojas</string>
     <string name="total_label">Total:</string>
     <string name="conclude_order_label">Concluir</string>
+    <string name="add_product_cart_message">Deseja adicionar o produto ao carrinho?</string>
+    <string name="product_name_added_success">adicionado com sucesso</string>
+    <string name="cart_item">Carrinho</string>
+    <string name="signout_item">Sair</string>
+    <string name="empty_cart_message">Carrinho vazio</string>
+    <string name="home">Home</string>
+    <string name="delete_order_label">Remover</string>
+    <string name="search_products_order_label">Add + produtos</string>
+    <string name="remove_product_cart_message">Deseja remover o produto do carrinho?</string>
+    <string name="removed_success_product">Produto removido</string>
 
 </resources>

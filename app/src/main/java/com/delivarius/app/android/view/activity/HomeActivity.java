@@ -16,14 +16,15 @@ public class HomeActivity extends DelivariusActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
+        loadMenuBar(false,false,R.id.menuBarLayout);
+        loadLogo(R.id.logoLayout);
 
         Intent intent = getIntent();
         currentUser = (User) intent.getSerializableExtra(USER);
         if(currentUser != null){
-            TextView userMenuHome = (TextView) findViewById(R.id.userHomeMenu);
-            userMenuHome.setText(currentUser.getLogin());
             currentOrder.setUser(currentUser);
         }
+
 
     }
 

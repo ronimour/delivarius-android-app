@@ -4,6 +4,13 @@
     android:layout_height="match_parent">
 
 
+    <LinearLayout
+        android:id="@+id/menuBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        />
+
     <SearchView
         android:id="@+id/storeSearchView"
         android:layout_width="match_parent"
@@ -15,7 +22,7 @@
     <ListView
         android:id="@+id/storeListView"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"/>
+        android:layout_height="335dp" />
 
 
 </LinearLayout>

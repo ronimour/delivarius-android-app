@@ -6,7 +6,10 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.text.Layout;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.delivarius.api.dto.Order;
@@ -19,9 +22,10 @@ import com.delivarius.api.service.exception.ServiceException;
 import java.net.ConnectException;
 
 import com.delivarius.app.R;
+import com.delivarius.app.android.view.helper.ViewHelper;
 import com.delivarius.app.android.view.util.ConnectionUtil;
 
-public class DelivariusActivity extends Activity {
+public abstract class DelivariusActivity extends Activity {
 
     public static final int REGISTER_REQUEST_CODE = 1;
 
@@ -65,7 +69,7 @@ public class DelivariusActivity extends Activity {
     protected void verifyInternetConnection() throws ConnectException{
         if(ConnectionUtil.isDelivariusServerAvailable(this))
             throw new ConnectException();
-
+        
     }
 
     public UserService getUserService() throws ServiceException {
@@ -174,6 +178,29 @@ public class DelivariusActivity extends Activity {
             progressDialog.dismiss();
         }
     }
+
+
+    protected void loadMenuBar(boolean showHomeMenu, boolean showCartMenu, int layoutContainerResource){
+        LinearLayout layout = findViewById(layoutContainerResource);
+        View view = getLayoutInflater().inflate(R.layout.menu_bar_layout,null,false);
+
+        ViewHelper.setVisibility(view, R.id.homeMenu, showHomeMenu);
+        ViewHelper.setVisibility(view, R.id.cartMenu, showCartMenu);
+
+        if(currentUser != null){
+            ViewHelper.setTextOnTextView(view, R.id.userMenu, currentUser.getLogin());
+        }
+
+        layout.addView(view);
+    }
+
+    protected void loadLogo(int layoutContainerResource){
+        LinearLayout layout = findViewById(layoutContainerResource);
+        View view = getLayoutInflater().inflate(R.layout.logo_layout,null,false);
+
+        layout.addView(view);
+    }
+
 
 
 

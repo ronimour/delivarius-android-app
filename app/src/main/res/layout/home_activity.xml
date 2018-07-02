@@ -6,48 +6,20 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-
     <LinearLayout
+        android:id="@+id/menuBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="right"
-        >
+        />
 
-        <TextView
-            android:id="@+id/userHomeMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="20dp"
-            android:drawableLeft="@drawable/user_icon_24"
-            android:drawablePadding="5dp"
-            />
 
-        <TextView
-            android:id="@+id/logoutHomeMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="20dp"
-            android:drawableLeft="@drawable/logout_icon_24"
-            android:drawablePadding="5dp"
-            android:text="@string/logout"
-            android:onClick="logout"
-            />
-
-    </LinearLayout>
-
-    <TextView
+    <LinearLayout
+        android:id="@+id/logoLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="50dp" />
+        />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_subtitle" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -62,7 +34,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="20dp"
-            android:drawableTop="@drawable/cart_icon_56"
+            android:drawableTop="@drawable/ic_shopping_cart"
             android:text="@string/cart_menu_label" />
 
         <TextView
@@ -72,7 +44,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="20dp"
-            android:drawableTop="@drawable/search_icon_56"
+            android:drawableTop="@drawable/ic_search_m"
             android:text="@string/search_products_menu_label"
             android:onClick="searchProducts"
             />
@@ -92,7 +64,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="20dp"
-            android:drawableTop="@drawable/money_icon_56"
+            android:drawableTop="@drawable/ic_shopping_bag_m"
             android:text="@string/orders_menu_label" />
 
         <TextView
@@ -102,7 +74,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="20dp"
-            android:drawableTop="@drawable/mail_icon_56"
+            android:drawableTop="@drawable/ic_envelope_m"
             android:text="@string/messages_menu_label" />
 
     </LinearLayout>
@@ -120,7 +92,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="20dp"
-            android:drawableTop="@drawable/pencil_icon_56"
+            android:drawableTop="@drawable/ic_user_edit_m"
             android:text="@string/edit_account_menu_label"
             android:onClick="editUser" />
 
@@ -131,7 +103,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="20dp"
-            android:drawableTop="@drawable/help_icon_56"
+            android:drawableTop="@drawable/ic_question_circle_m"
             android:text="@string/help_menu_label" />
 
     </LinearLayout>
