@@ -134,15 +134,22 @@ public class ShoppingActivity extends DelivariusActivity {
             productListView = findViewById(R.id.productListView);
             productListView.setAdapter(productAdapter);
 
-            OrderHelper.setStore(currentOrder, selectedStore);
-
+            currentStore = selectedStore;
         }
     }
 
     public void addProductToCart(View view) {
         addProductToCartOnClickListener.setView(view);
+        String message = null;
+        if(currentOrder != null && !currentStore.equals(currentOrder.getStore())){
+            message = getString(R.string.add_product_cart_message_remove_current_order);
+            addProductToCartOnClickListener.setRemoveCurrentOrder(true);
+        } else {
+            message = getString(R.string.add_product_cart_message);
+            addProductToCartOnClickListener.setRemoveCurrentOrder(false);
+        }
         showDialogYesOrNo(addProductToCartOnClickListener, cancelDialog,
-                getString(R.string.add_product_cart_message));
+                message);
     }
 
     public void incrementProduct(View view){
@@ -207,12 +214,22 @@ public class ShoppingActivity extends DelivariusActivity {
 
     private class AddProductToCartOnClickListener extends ProductCartOnClickListener {
 
+        private boolean removeCurrentOrder;
+
+        public void setRemoveCurrentOrder(boolean removeCurrentOrder) {
+            this.removeCurrentOrder = removeCurrentOrder;
+        }
+
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
             Product product = (Product) getView().getTag();
             if (product != null) {
-                OrderHelper.addProductToOrder(currentOrder, product, 1);
-                showToastLong(product.getName() + " " + getString(R.string.product_name_added_success));
+                if (removeCurrentOrder) {
+                } else {
+                    //OrderHelper.setStore();
+                    OrderHelper.addProductToOrder(currentOrder, product, 1);
+                    showToastLong(product.getName() + " " + getString(R.string.product_name_added_success));
+                }
             }
         }
     }

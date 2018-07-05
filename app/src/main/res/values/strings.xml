@@ -86,5 +86,6 @@
     <string name="search_products_order_label">Add + produtos</string>
     <string name="remove_product_cart_message">Deseja remover o produto do carrinho?</string>
     <string name="removed_success_product">Produto removido</string>
+    <string name="add_product_cart_message_remove_current_order">Você está adicionando um produto de uma outra loja ao pedido atual. Adicionar esse produto acarretará na remoção dos produtos já adicionados. Deseja realmente adicionar o produto?</string>
 
 </resources>

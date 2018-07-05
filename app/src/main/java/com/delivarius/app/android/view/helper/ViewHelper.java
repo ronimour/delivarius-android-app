@@ -1,7 +1,6 @@
 package com.delivarius.app.android.view.helper;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.EditText;
@@ -10,8 +9,8 @@ import android.widget.TextView;
 
 import com.delivarius.api.dto.ItemOrder;
 import com.delivarius.api.dto.Product;
-import com.delivarius.app.R;
 import com.delivarius.api.dto.Store;
+import com.delivarius.app.R;
 
 public class ViewHelper {
 
@@ -65,8 +64,6 @@ public class ViewHelper {
         }
     }
 
-
-
     public static void inflateView(View rowView, Store store){
         //TODO refactor to ViewHelper
         TextView nameTextView = (TextView) rowView.findViewById(R.id.storeNameTextView);
@@ -100,6 +97,5 @@ public class ViewHelper {
         ViewHelper.setTag(rowView, R.id.incrementProductImageView, itemOrder);
         ViewHelper.setTag(rowView, R.id.decrementProductImageView, itemOrder);
     }
-
 
 }
