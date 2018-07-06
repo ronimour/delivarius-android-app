@@ -91,7 +91,7 @@ public class ShoppingActivity extends DelivariusActivity {
     }
 
     private void loadCart() {
-        if(currentOrder.getItems().size() > 0){
+        if(currentOrder != null && currentOrder.getItems().size() > 0){
             setContentView(R.layout.cart_activity);
             loadMenuBar(true,false, R.id.menuBarLayout);
 
@@ -199,14 +199,7 @@ public class ShoppingActivity extends DelivariusActivity {
         public void onClick(DialogInterface dialogInterface, int i) {
             ItemOrder item = (ItemOrder) getView().getTag();
             if(item != null){
-                currentOrder.getItems().remove(item);
-                if(currentOrder.getItems().size() == 0){
-                    getView().setTag(currentOrder.getStore());
-                    selectStore(getView());
-                } else {
-                    itemOrderAdapter.notifyDataSetChanged();
-                }
-                showToastLong(getString(R.string.removed_success_product));
+
 
             }
         }
@@ -224,12 +217,21 @@ public class ShoppingActivity extends DelivariusActivity {
         public void onClick(DialogInterface dialogInterface, int i) {
             Product product = (Product) getView().getTag();
             if (product != null) {
-                if (removeCurrentOrder) {
-                } else {
-                    //OrderHelper.setStore();
-                    OrderHelper.addProductToOrder(currentOrder, product, 1);
-                    showToastLong(product.getName() + " " + getString(R.string.product_name_added_success));
+                try {
+                    AddItemOrderAsyncTack addItemOrderAsyncTack = getAddItemOrderAsyncTack();
+                    addItemOrderAsyncTack.setRemoveCurrentOrder(removeCurrentOrder);
+
+                    ItemOrder itemOrder = new ItemOrder();
+                    itemOrder.setProduct(product);
+                    itemOrder.setAmount(1);
+                    OrderHelper.updateTotalPrice(itemOrder);
+
+                    addItemOrderAsyncTack.execute(itemOrder);
+
+                } catch (ConnectException e) {
+                    e.printStackTrace();
                 }
+
             }
         }
     }
@@ -244,6 +246,139 @@ public class ShoppingActivity extends DelivariusActivity {
     private LoadStoresAsyncTask getLoadStoresAsyncTask() throws ConnectException {
         verifyInternetConnection();
         return new LoadStoresAsyncTask();
+    }
+
+    private AddItemOrderAsyncTack getAddItemOrderAsyncTack() throws ConnectException {
+        verifyInternetConnection();
+        return new AddItemOrderAsyncTack();
+    }
+
+    private class RemoveItemOrderAsyncTack extends AsyncTask<ItemOrder, Void, Boolean> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            showProcessDialog(ShoppingActivity.this, getString(R.string.removing_product_from_order_wait_message));
+        }
+
+        @Override
+        protected Boolean doInBackground(ItemOrder... itemOrders) {
+            ItemOrder item = itemOrders[0];
+            boolean itemRemoved = false;
+            try {
+                 itemRemoved = getOrderService().removeItem(item);
+                 if(itemRemoved) {
+                     currentOrder.getItems().remove(item);
+                 }
+            } catch (ServiceException e) {
+                e.printStackTrace();
+                cancel(true);
+            }
+
+            return itemRemoved;
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            dismissProcessDialog();
+            showToastLong(getString(R.string.fail_to_remove_product));
+        }
+
+        @Override
+        protected void onPostExecute(Boolean itemRemoved) {
+            super.onPostExecute(itemRemoved);
+            dismissProcessDialog();
+            if (itemRemoved) {
+                showToastLong(getString(R.string.removed_success_product));
+                if(currentOrder.getItems().size() == 0){
+                    View view = new View(ShoppingActivity.this);
+                    view.setTag(currentOrder.getStore());
+                    selectStore(view);
+                } else {
+                    itemOrderAdapter.notifyDataSetChanged();
+                }
+            } else{
+                cancel(false);
+            }
+        }
+    }
+
+    private class AddItemOrderAsyncTack extends AsyncTask<ItemOrder, Void, ItemOrder> {
+
+        private boolean removeCurrentOrder;
+
+        public boolean isRemoveCurrentOrder() {
+            return removeCurrentOrder;
+        }
+
+        public void setRemoveCurrentOrder(boolean removeCurrentOrder) {
+            this.removeCurrentOrder = removeCurrentOrder;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            showProcessDialog(ShoppingActivity.this, getString(R.string.adding_product_to_order_wait_message));
+        }
+
+        @Override
+        protected ItemOrder doInBackground(ItemOrder... itemOrders) {
+            ItemOrder itemOrder = itemOrders[0];
+            if(isRemoveCurrentOrder() || currentOrder == null){
+                try {
+                    boolean isNewOrderOrCurrentOrderWasRemoved = currentOrder == null ? true : getOrderService().removeOrder(currentOrder);
+
+                    if(isNewOrderOrCurrentOrderWasRemoved){
+                        currentOrder = new Order();
+                        currentOrder.setStore(currentStore);
+                        currentOrder.setUser(currentUser);
+                        itemOrder.setOrderId(null);
+                        currentOrder.getItems().add(itemOrder);
+                        currentOrder = getOrderService().createOrder(currentOrder);
+                        if(currentOrder != null) {
+                            itemOrder = currentOrder.getItems().get(0);
+                        } else {
+                            cancel(true);
+                        }
+                    } else{
+                        cancel(true);
+                    }
+
+                } catch (ServiceException e) {
+                    e.printStackTrace();
+                    cancel(true);
+                }
+            } else {
+                try {
+                    itemOrder.setOrderId(currentOrder.getId());
+                    itemOrder = getOrderService().addItem(itemOrder);
+                    if(itemOrder != null) {
+                        currentOrder.getItems().add(itemOrder);
+                    } else {
+                        cancel(true);
+                    }
+                } catch (ServiceException e) {
+                    e.printStackTrace();
+                    cancel(true);
+                }
+            }
+            return itemOrder;
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            dismissProcessDialog();
+            showToastLong(getString(R.string.fail_to_add_product_to_cart));
+        }
+
+        @Override
+        protected void onPostExecute(ItemOrder itemOrder) {
+            super.onPostExecute(itemOrder);
+            dismissProcessDialog();
+            showToastLong(itemOrder.getProduct().getName()+" "+getString(R.string.product_name_added_success));
+        }
     }
 
     private class LoadStoresAsyncTask extends AsyncTask<Void, Void, List<Store>> {

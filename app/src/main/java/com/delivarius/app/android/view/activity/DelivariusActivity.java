@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.delivarius.api.dto.Order;
 import com.delivarius.api.dto.Store;
 import com.delivarius.api.dto.User;
+import com.delivarius.api.service.OrderService;
 import com.delivarius.api.service.ServiceLocator;
 import com.delivarius.api.service.StoreService;
 import com.delivarius.api.service.UserService;
@@ -60,6 +61,8 @@ public abstract class DelivariusActivity extends Activity {
 
     protected StoreService storeService = null;
 
+    protected OrderService orderService = null;
+
     protected static User currentUser = null;
 
     protected static Order currentOrder = null;
@@ -73,6 +76,14 @@ public abstract class DelivariusActivity extends Activity {
         if(ConnectionUtil.isDelivariusServerAvailable(this))
             throw new ConnectException();
         
+    }
+
+    public OrderService getOrderService() throws ServiceException {
+        if(orderService == null){
+            orderService = (OrderService) ServiceLocator.getInstance().getService(OrderService.class);
+            orderService.setUrlBase(ConnectionUtil.DELIVARIUS_ADDRESS);
+        }
+        return orderService;
     }
 
     public UserService getUserService() throws ServiceException {
@@ -113,7 +124,7 @@ public abstract class DelivariusActivity extends Activity {
 
     protected void showProcessDialog(Activity activity, String waitMessage){
         progressDialog = new ProgressDialog(activity);
-        progressDialog.setMessage(getString(R.string.loading_stores_wait_message));
+        progressDialog.setMessage(waitMessage);
         progressDialog.show();
     }
 

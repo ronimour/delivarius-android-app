@@ -21,10 +21,6 @@ public class HomeActivity extends DelivariusActivity {
 
         Intent intent = getIntent();
         currentUser = (User) intent.getSerializableExtra(USER);
-        if(currentUser != null){
-            currentOrder.setUser(currentUser);
-        }
-
 
     }
 

@@ -87,5 +87,10 @@
     <string name="remove_product_cart_message">Deseja remover o produto do carrinho?</string>
     <string name="removed_success_product">Produto removido</string>
     <string name="add_product_cart_message_remove_current_order">Você está adicionando um produto de uma outra loja ao pedido atual. Adicionar esse produto acarretará na remoção dos produtos já adicionados. Deseja realmente adicionar o produto?</string>
+    <string name="removing_order_message_wait">Removendo pedido...</string>
+    <string name="adding_product_to_order_wait_message">Adicionando produto ao carrinho...</string>
+    <string name="fail_to_add_product_to_cart">Erro ao adicionar produto ao carrinho</string>
+    <string name="removing_product_from_order_wait_message">Removendo produto do carrinho...</string>
+    <string name="fail_to_remove_product">Erro ao remover produto</string>
 
 </resources>
